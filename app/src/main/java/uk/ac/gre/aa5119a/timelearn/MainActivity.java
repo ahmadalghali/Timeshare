@@ -3,6 +3,7 @@ package uk.ac.gre.aa5119a.timelearn;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,19 +14,29 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import uk.ac.gre.aa5119a.timelearn.fragment.AcademyFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.AccountFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.HomeFragment;
+import uk.ac.gre.aa5119a.timelearn.fragment.HomeFragmentLoggedIn;
 import uk.ac.gre.aa5119a.timelearn.fragment.SearchFragment;
 import uk.ac.gre.aa5119a.timelearn.model.User;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
+    private HomeViewModel homeViewModel;
 
     private BottomNavigationView bottomNavigation;
+
+    private User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getUser().observe(this, user -> {
+            loggedInUser = user;
+        });
 
         assignGlobalVariables();
 
@@ -39,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private void assignGlobalVariables(){
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(bottomNavigationListener);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
@@ -50,10 +64,19 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.nav_home:
-                    selectedFragment = new HomeFragment();
+                    if(loggedInUser != null){
+                        selectedFragment = new HomeFragmentLoggedIn();
+                    } else{
+                        selectedFragment = new HomeFragment();
+                    }
                     break;
                 case R.id.nav_account:
-                    selectedFragment = new AccountFragment();
+//                    if(loggedInUser != null){
+//                        selectedFragment = new HomeFragmentLoggedIn();
+
+//                    } else{
+                        selectedFragment = new AccountFragment();
+//                    }
                     break;
                 case R.id.nav_academy:
                     selectedFragment = new AcademyFragment();
