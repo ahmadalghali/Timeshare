@@ -33,10 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getUser().observe(this, user -> {
-            loggedInUser = user;
-        });
+
 
         assignGlobalVariables();
 
@@ -52,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnNavigationItemSelectedListener(bottomNavigationListener);
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getUser().observe(this, user -> {
+            loggedInUser = user;
+        });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }

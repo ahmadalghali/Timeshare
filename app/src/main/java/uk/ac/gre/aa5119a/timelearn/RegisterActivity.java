@@ -3,23 +3,17 @@ package uk.ac.gre.aa5119a.timelearn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +21,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.model.User;
-import uk.ac.gre.aa5119a.timelearn.web.LoginResponse;
 import uk.ac.gre.aa5119a.timelearn.web.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
@@ -42,15 +35,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private TimeShareApi timeShareApi;
 
-    private LinearLayout loginPageLayout;
     private LinearLayout registerPageLayout;
-    private LoadingDialog loadingDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.dialog_register);
 
         assignGlobalVariables();
         initListeners();
@@ -70,9 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         registerButton = findViewById(R.id.registerButton);
         signInButton = findViewById(R.id.signInButton);
-        loginPageLayout = findViewById(R.id.loginPageLayout);
-        registerPageLayout = findViewById(R.id.registerPageLayout);
-        loadingDialog = new LoadingDialog(RegisterActivity.this);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
     }
 

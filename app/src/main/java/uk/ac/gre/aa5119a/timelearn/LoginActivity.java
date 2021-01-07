@@ -3,19 +3,15 @@ package uk.ac.gre.aa5119a.timelearn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
@@ -35,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button signInButton;
     private TextView registerButton;
 
-    private Gson gson;
     private TimeShareApi timeShareApi;
 
     private LinearLayout loginPageLayout;
@@ -45,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.dialog_login);
 
         assignGlobalVariables();
         initListeners();
