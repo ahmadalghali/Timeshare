@@ -1,19 +1,13 @@
 package uk.ac.gre.aa5119a.timelearn.fragment;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,23 +15,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
-import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog2;
 import uk.ac.gre.aa5119a.timelearn.dialog.RegisterDialog;
-import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
-import uk.ac.gre.aa5119a.timelearn.web.LoginResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 public class HomeFragment extends Fragment {
@@ -94,16 +77,6 @@ public class HomeFragment extends Fragment {
         loginDialog.show(getActivity().getSupportFragmentManager(), "LoginDialog");
     }
 
-
-
-//    private void showRegisterDialog(){
-//
-//        registerDialog = new RegisterDialog(view.getContext());
-//
-//        registerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        registerDialog.show();
-//    }
 
 
     private void initRetrofit(){

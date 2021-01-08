@@ -1,8 +1,10 @@
-package uk.ac.gre.aa5119a.timelearn;
+package uk.ac.gre.aa5119a.timelearn.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
+
+import uk.ac.gre.aa5119a.timelearn.R;
 
 public class LoadingDialog {
 

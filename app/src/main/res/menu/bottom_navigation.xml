@@ -11,12 +11,14 @@
         android:icon="@drawable/ic_search"
         android:title="Search"/>
 
-
-
     <item
         android:id="@+id/nav_academy"
         android:icon="@drawable/ic_learn"
         android:title="Academy"/>
+    <item
+        android:id="@+id/nav_notifications"
+        android:icon="@drawable/ic_bell"
+        android:title="Notifications"/>
 
     <item
         android:id="@+id/nav_account"
