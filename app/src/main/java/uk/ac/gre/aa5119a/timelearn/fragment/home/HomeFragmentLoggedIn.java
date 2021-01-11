@@ -1,4 +1,4 @@
-package uk.ac.gre.aa5119a.timelearn.fragment;
+package uk.ac.gre.aa5119a.timelearn.fragment.home;
 
 import android.app.Dialog;
 import android.graphics.Color;

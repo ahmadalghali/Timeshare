@@ -9,31 +9,6 @@
     >
 
 
-    <Button
-        android:id="@+id/learnBtn"
-        android:layout_width="220dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="216dp"
-        android:background="@drawable/rounded_white_flat_left"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Learn"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/teachBtn"
-        android:layout_width="220dp"
-        android:layout_height="55dp"
-        android:background="@drawable/rounded_white_flat_right"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Teach"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
-
     <ImageView
         android:id="@+id/profileButton"
         android:layout_width="60dp"

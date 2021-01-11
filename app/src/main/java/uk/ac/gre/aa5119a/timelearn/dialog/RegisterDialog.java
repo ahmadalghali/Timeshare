@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
@@ -53,6 +56,9 @@ public class RegisterDialog extends DialogFragment {
 
     private static final String BLUE_PRESSED_COLOR = "#006fab";
 
+    private FrameLayout mainActivityFrameLayout;
+
+
 
     @NonNull
     @Override
@@ -83,6 +89,8 @@ public class RegisterDialog extends DialogFragment {
          etConfirmPassword = view.findViewById(R.id.etConfirmPassword);
          registerButton = view.findViewById(R.id.registerButton);
          signInButton = view.findViewById(R.id.signInButton);
+        mainActivityFrameLayout = view.findViewById(R.id.fragment_container);
+
     }
 
     private void setListeners(){
@@ -103,78 +111,6 @@ public class RegisterDialog extends DialogFragment {
             }
         });
     }
-
-//    private void showRegisterDialog(){
-//        registerDialog.setContentView(R.layout.dialog_register);
-//
-//
-//
-//
-//        signInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                loginDialog.show();
-//                registerDialog.dismiss();
-//                showLoginDialog();
-//
-//            }
-//        });
-//
-//        registerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                registerButtonClicked();
-//            }
-//        });
-//
-//
-//
-//
-//        if(loginDialog.isShowing()){
-//            loginDialog.dismiss();
-//        }
-//        registerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        registerDialog.show();
-//
-//    }
-//
-//    private void showLoginDialog(){
-//        loginDialog.setContentView(R.layout.dialog_login);
-//
-//
-//        etEmail = loginDialog.findViewById(R.id.etEmail);
-//        etPassword = loginDialog.findViewById(R.id.etPassword);
-//        signInButton = loginDialog.findViewById(R.id.signInButton);
-//        registerButton = loginDialog.findViewById(R.id.registerButton);
-//
-//        signInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                buttonEffect(v,BLUE_PRESSED_COLOR);
-//                signInButtonClicked();
-//            }
-//        });
-//
-//        registerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                registerDialog.show();
-//                loginDialog.dismiss();
-//                showRegisterDialog();
-//
-//            }
-//        });
-//
-//        if(registerDialog.isShowing()){
-//            registerDialog.dismiss();
-//        }
-//
-//        loginDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//
-//        loginDialog.show();
-//
-//    }
 
 
     private void showLoginDialog(){
@@ -232,7 +168,7 @@ public class RegisterDialog extends DialogFragment {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
 
                 if(!response.isSuccessful()){
-//                    Snackbar.make(registerPageLayout, "Error: " + response.errorBody() + " Code: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(mainActivityFrameLayout, "Error: " + response.errorBody() + " Code: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
                     return;
                 }
 
@@ -251,7 +187,7 @@ public class RegisterDialog extends DialogFragment {
                     Toast.makeText(getActivity(), "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
 
 
-////                    Snackbar.make(loginPageLayout, "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(mainActivityFrameLayout, "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).show();
 //                    Toast.makeText(RegisterActivity.this, "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
                 }
 
@@ -260,7 +196,7 @@ public class RegisterDialog extends DialogFragment {
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
 
-//                Snackbar.make(registerPageLayout,t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(mainActivityFrameLayout,t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });
 

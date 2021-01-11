@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import uk.ac.gre.aa5119a.timelearn.fragment.AcademyFragment;
+import uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.AccountFragment;
-import uk.ac.gre.aa5119a.timelearn.fragment.HomeFragment;
-import uk.ac.gre.aa5119a.timelearn.fragment.HomeFragmentLoggedIn;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragment;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentLoggedIn;
+import uk.ac.gre.aa5119a.timelearn.fragment.NotificationsFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.SearchFragment;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_search:
                     selectedFragment = new SearchFragment();
+                    break;
+                case R.id.nav_notifications:
+                    selectedFragment = new NotificationsFragment();
                     break;
 
             }

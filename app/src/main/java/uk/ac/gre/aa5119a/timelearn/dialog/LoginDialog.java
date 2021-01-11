@@ -13,9 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,7 +26,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
-import uk.ac.gre.aa5119a.timelearn.fragment.HomeFragmentLoggedIn;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentLoggedIn;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.LoginResponse;
@@ -42,7 +41,7 @@ public class LoginDialog extends DialogFragment {
 
     private TimeShareApi timeShareApi;
 
-    private LinearLayout loginPageLayout;
+    private FrameLayout mainActivityFrameLayout;
 
     private HomeViewModel homeViewModel;
 
@@ -82,7 +81,7 @@ public class LoginDialog extends DialogFragment {
         etPassword = view.findViewById(R.id.etPassword);
         signInButton = view.findViewById(R.id.signInButton);
         registerButton = view.findViewById(R.id.registerButton);
-        loginPageLayout = view.findViewById(R.id.loginPageLayout);
+        mainActivityFrameLayout = view.findViewById(R.id.fragment_container);
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
     }
 
@@ -161,7 +160,8 @@ public class LoginDialog extends DialogFragment {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if(!response.isSuccessful()){
-                    Snackbar.make(loginPageLayout, "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
+//                    showSnackBar("Error: " + response.code());
                     return;
                 }
 
@@ -174,7 +174,10 @@ public class LoginDialog extends DialogFragment {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragmentLoggedIn()).commit();
                     dismiss();
 
-                    Toast.makeText(getActivity(), "Welcome " + loginResponse.getUser().getEmail() , Toast.LENGTH_LONG).show();
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG).show();
+//                    showSnackBar("Welcome " + loginResponse.getUser().getEmail());
+
+//                    Toast.makeText(getActivity(), "Welcome " + loginResponse.getUser().getEmail() , Toast.LENGTH_LONG).show();
 
 
                 } else if(loginResponse.getMessage().equals("incorrect password")){
@@ -187,7 +190,8 @@ public class LoginDialog extends DialogFragment {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Snackbar.make(loginPageLayout,t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+//                showSnackBar(t.getMessage());
             }
         });
 
@@ -213,5 +217,15 @@ public class LoginDialog extends DialogFragment {
         });
     }
 
+//    private void showSnackBar(String message){
+//        Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content),
+//                "Your message", Snackbar.LENGTH_LONG);
+//        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)
+//                snack.getView().getLayoutParams();
+//        params.setMargins(0, 0, 0, 50);
+//        snack.getView().setLayoutParams(params);
+//        snack.setAnchorView(view);
+//        snack.show();
+//    }
 
 }
