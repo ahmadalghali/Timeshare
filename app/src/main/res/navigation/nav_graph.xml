@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/academyFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragment"
+        android:label="fragment_academy"
+        tools:layout="@layout/fragment_academy" >
+        <action
+            android:id="@+id/action_academyFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.academy.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_academyFragment"
+            app:destination="@id/academyFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoriesAcademicFragment"
+            app:destination="@id/categoriesAcademicFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesAcademicFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.academy.CategoriesAcademicFragment"
+        android:label="fragment_academic_categories"
+        tools:layout="@layout/fragment_academic_categories" >
+        <action
+            android:id="@+id/action_categoriesAcademicFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_categoriesAcademicFragment_to_teachSubjectDetailsFragment"
+            app:destination="@id/teachSubjectDetailsFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
+    <fragment
+        android:id="@+id/teachSubjectDetailsFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.academy.TeachSubjectDetailsFragment"
+        android:label="fragment_teach_subject_details"
+        tools:layout="@layout/fragment_teach_subject_details" >
+        <action
+            android:id="@+id/action_teachSubjectDetailsFragment_to_categoriesAcademicFragment"
+            app:destination="@id/categoriesAcademicFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+</navigation>

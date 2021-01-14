@@ -13,10 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
+import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.utils.Effects;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
+
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class AcademyFragment extends Fragment {
 
@@ -26,6 +33,8 @@ public class AcademyFragment extends Fragment {
 
     private View view;
     private AcademyViewModel academyViewModel;
+
+    private NavController navController;
 
     @Nullable
     @Override
@@ -52,8 +61,12 @@ public class AcademyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 buttonEffect(v,Effects.WHITE_PRESSED_COLOR);
-                academyViewModel.setEducationType(1);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesFragment()).commit();
+                academyViewModel.setEducationType("Learn");
+
+                NavController navController = navHostFragment.getNavController();
+                NavDirections action = AcademyFragmentDirections.actionAcademyFragmentToCategoriesFragment();
+                navController.navigate(action);
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesFragment()).commit();
 
             }
         });
@@ -62,8 +75,29 @@ public class AcademyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 buttonEffect(v,Effects.WHITE_PRESSED_COLOR);
-                academyViewModel.setEducationType(2);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesFragment()).commit();
+                academyViewModel.setEducationType("Teach");
+
+//                NavHostFragment navHostFragment =
+//                        (NavHostFragment) getFragmentManager().findFragmentById(R.id.fragment_container);
+//
+//                NavController navController = navHostFragment.getNavController();
+
+//                navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager()
+//                        .findFragmentById(R.id.fragment_container);
+
+                NavController navController = navHostFragment.getNavController();
+                NavDirections action = AcademyFragmentDirections.actionAcademyFragmentToCategoriesFragment();
+                navController.navigate(action);
+
+
+//                Navigation.findNavController(view).navigate(action);
+
+
+//                navController = Navigation.findNavController(view);
+//
+//                navController.navigate();
+
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesFragment()).commit();
             }
         });
 

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,6 +41,8 @@ public class HomeFragment extends Fragment {
     private static final String BLUE_PRESSED_COLOR = "#006fab";
     private static final String WHITE_PRESSED_COLOR = "#808080";
 
+//    NavController navController;
+
 
     @Nullable
     @Override
@@ -52,10 +56,15 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
+
+
     private void assignGlobalVariables(){
         homeFragmentLayout = view.findViewById(R.id.homeFragmentLayout);
         profileButton = view.findViewById(R.id.profileButton);
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+
+//        navController = Navigation.findNavController(view);
 
     }
 

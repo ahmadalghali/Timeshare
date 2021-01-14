@@ -15,9 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
+
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class CategoriesFragment extends Fragment {
 
@@ -59,12 +63,7 @@ public class CategoriesFragment extends Fragment {
 
         academyViewModel = new ViewModelProvider(requireActivity()).get(AcademyViewModel.class);
 
-        switch (academyViewModel.getEducationType().getValue()){
-            case 1: tvEducationType.setText("Learn");
-                break;
-            case 2: tvEducationType.setText("Teach");
-                break;
-        }
+        tvEducationType.setText(academyViewModel.getEducationType().getValue());
 
     }
 
@@ -72,7 +71,10 @@ public class CategoriesFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AcademyFragment()).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AcademyFragment()).commit();
+                NavController navController = navHostFragment.getNavController();
+                NavDirections action = CategoriesFragmentDirections.actionCategoriesFragmentToAcademyFragment();
+                navController.navigate(action);
             }
         });
 
@@ -80,7 +82,10 @@ public class CategoriesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 buttonEffect(v, WHITE_PRESSED_COLOR);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesAcademicFragment()).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CategoriesAcademicFragment()).commit();
+                NavController navController = navHostFragment.getNavController();
+                NavDirections action = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriesAcademicFragment();
+                navController.navigate(action);
 
             }
         });

@@ -1,11 +1,14 @@
 package uk.ac.gre.aa5119a.timelearn.model.ui;
 
-public class Category {
+public class Subject {
 
+    private int subjectId;
     private int icon;
     private String title;
 
-    public Category(int icon, String title) {
+
+    public Subject(int subjectId, int icon, String title) {
+        this.subjectId = subjectId;
         this.icon = icon;
         this.title = title;
     }
@@ -24,5 +27,13 @@ public class Category {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 }

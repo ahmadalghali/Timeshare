@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     android:id="@+id/academyFragmentLayout"
+    tools:context=".fragment.academy.AcademyFragment"
+
     >
 
 

@@ -11,18 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
-import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.gre.aa5119a.timelearn.R;
-import uk.ac.gre.aa5119a.timelearn.model.ui.Category;
+import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
-     List<Category> categories = new ArrayList<>();
+     List<Subject> categories = new ArrayList<>();
+
+    private OnCategoryClickedListener onCategoryClickedListener;
+
+    public void setOnCategoryClickedListener(OnCategoryClickedListener onCategoryClickedListener) {
+        this.onCategoryClickedListener = onCategoryClickedListener;
+    }
 
 
     public CategoriesAdapter(){
@@ -33,7 +36,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public CategoriesViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
 
-        return new CategoriesViewHolder(itemView);
+        return new CategoriesViewHolder(itemView, onCategoryClickedListener);
     }
 
     @Override
@@ -49,7 +52,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return categories.size();
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<Subject> categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
@@ -59,13 +62,34 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         ImageView catIcon;
         TextView catTitle;
 
-        public CategoriesViewHolder(@NonNull View itemView) {
+        public CategoriesViewHolder(@NonNull View itemView,OnCategoryClickedListener onCategoryClickedListener) {
             super(itemView);
             catIcon = itemView.findViewById(R.id.cat_icon);
             catTitle = itemView.findViewById(R.id.cat_title);
 
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(onCategoryClickedListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            onCategoryClickedListener.onCategoryClicked(position);
+                        }
+                    }
+                }
+            });
+
         }
+    }
+
+
+
+    public interface OnCategoryClickedListener {
+
+        void onCategoryClicked(int position);
+
     }
 
 }

@@ -1,9 +1,11 @@
-package uk.ac.gre.aa5119a.timelearn.fragment;
+package uk.ac.gre.aa5119a.timelearn.fragment.account;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,11 +13,13 @@ import androidx.fragment.app.Fragment;
 
 import uk.ac.gre.aa5119a.timelearn.R;
 
-public class NotificationsFragment extends Fragment {
+public class AccountFragment extends Fragment {
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
+
 }

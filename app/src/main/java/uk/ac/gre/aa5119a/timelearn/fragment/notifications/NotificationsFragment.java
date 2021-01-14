@@ -1,4 +1,4 @@
-package uk.ac.gre.aa5119a.timelearn.fragment;
+package uk.ac.gre.aa5119a.timelearn.fragment.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import uk.ac.gre.aa5119a.timelearn.R;
 
-public class SearchFragment extends Fragment {
-
+public class NotificationsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_notifications, container, false);
     }
 }
