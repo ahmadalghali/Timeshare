@@ -1,20 +1,27 @@
 package uk.ac.gre.aa5119a.timelearn.dialog;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,11 +33,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
+import uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragmentDirections;
 import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentLoggedIn;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.LoginResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
+
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class LoginDialog extends DialogFragment {
 
@@ -171,10 +182,31 @@ public class LoginDialog extends DialogFragment {
                 if(loginResponse.getMessage().equals("logged in")){
 
                     homeViewModel.setUser(loginResponse.getUser());
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragmentLoggedIn()).commit();
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragmentLoggedIn()).commit();
+
+                    NavController navController = navHostFragment.getNavController();
+                    NavDirections action = LoginDialogDirections.actionLoginDialogToHomeFragmentLoggedIn();
+                    navController.navigate(action);
+
+
+                    bottomNavigation.getMenu().clear();
+                    bottomNavigation.inflateMenu(R.menu.bottom_navigation_logged_in);
                     dismiss();
 
-                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG).show();
+//getActivity().findViewById(android.R.id.content)
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG);
+
+//                    Snackbar snack = Snackbar.make(getActivity().findViewById(R.id.snackBarArea),
+//                            "Welcome " + loginResponse.getUser().getEmail(), Snackbar.LENGTH_LONG);
+//                    CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)
+//                            snack.getView().getLayoutParams();
+//                    params.setMargins(0, 0, 0, bottomNavigation.getHeight() + 50);
+//                    snack.getView().setLayoutParams(params);
+//                    snack.show();
+
+                    snackbar.setAnchorView(bottomNavigation);
+                    snackbar.show();
+
 //                    showSnackBar("Welcome " + loginResponse.getUser().getEmail());
 
 //                    Toast.makeText(getActivity(), "Welcome " + loginResponse.getUser().getEmail() , Toast.LENGTH_LONG).show();
@@ -196,6 +228,7 @@ public class LoginDialog extends DialogFragment {
         });
 
     }
+
     public static void buttonEffect(View button, String hexColor){
         button.setOnTouchListener(new View.OnTouchListener() {
 

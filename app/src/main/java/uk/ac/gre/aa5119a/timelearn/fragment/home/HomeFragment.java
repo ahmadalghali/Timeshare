@@ -15,15 +15,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
+import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialogDirections;
 import uk.ac.gre.aa5119a.timelearn.dialog.RegisterDialog;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
+
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -44,12 +48,20 @@ public class HomeFragment extends Fragment {
 //    NavController navController;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         view = inflater.inflate(R.layout.fragment_home, container, false);
         assignGlobalVariables();
+//        if(homeViewModel.getUser().getValue() != null){
+//            NavController navController = navHostFragment.getNavController();
+//            NavDirections action = HomeFragmentDirections.actionHomeFragmentToHomeFragmentLoggedIn();
+//            navController.navigate(action);
+//        }
+
         setListeners();
         initRetrofit();
 
@@ -79,11 +91,15 @@ public class HomeFragment extends Fragment {
 
     private void showLoginDialog(){
 
-        loginDialog = new LoginDialog();
-//
-        loginDialog.setTargetFragment(getTargetFragment(), 1);
-//
-        loginDialog.show(getActivity().getSupportFragmentManager(), "LoginDialog");
+        NavController navController = navHostFragment.getNavController();
+        NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginDialog();
+        navController.navigate(action);
+
+//        loginDialog = new LoginDialog();
+////
+//        loginDialog.setTargetFragment(getTargetFragment(), 1);
+////
+//        loginDialog.show(getActivity().getSupportFragmentManager(), "LoginDialog");
     }
 
 

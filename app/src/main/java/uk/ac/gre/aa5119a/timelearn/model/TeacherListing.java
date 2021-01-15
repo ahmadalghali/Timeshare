@@ -4,7 +4,7 @@ import java.util.List;
 
 import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
 
-public class Listing {
+public class TeacherListing {
 
     private int id;
     private Subject subject;
@@ -12,16 +12,16 @@ public class Listing {
 
     private String title;
     private String description;
-    private int image;
+    private String imageId;
     private List<String> teachingStyles;
     private List<String> daysAvailable;
 
-    public Listing(Subject subject, User teacher, String title, String description, int image, List<String> teachingStyles, List<String> daysAvailable) {
+    public TeacherListing(Subject subject, User teacher, String title, String description, String imageId, List<String> teachingStyles, List<String> daysAvailable) {
         this.subject = subject;
         this.teacher = teacher;
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.imageId = imageId;
         this.teachingStyles = teachingStyles;
         this.daysAvailable = daysAvailable;
     }
@@ -67,12 +67,12 @@ public class Listing {
         this.description = description;
     }
 
-    public int getImage() {
-        return image;
+    public String getImage() {
+        return imageId;
     }
 
     public void setImage(int image) {
-        this.image = image;
+        this.imageId = imageId;
     }
 
     public List<String> getTeachingStyles() {
@@ -89,5 +89,20 @@ public class Listing {
 
     public void setDaysAvailable(List<String> daysAvailable) {
         this.daysAvailable = daysAvailable;
+    }
+
+
+    @Override
+    public String toString() {
+        return "TeacherListing{" +
+                "id=" + id +
+                ", subject=" + subject +
+                ", teacher=" + teacher +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", imageId=" + imageId +
+                ", teachingStyles=" + teachingStyles +
+                ", daysAvailable=" + daysAvailable +
+                '}';
     }
 }

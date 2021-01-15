@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,11 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 
 import uk.ac.gre.aa5119a.timelearn.R;
+import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialogDirections;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
+
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class HomeFragmentLoggedIn extends Fragment{
 
@@ -48,7 +54,9 @@ public class HomeFragmentLoggedIn extends Fragment{
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        view = inflater.inflate(R.layout.fragment_home_logged_in, container, false);
         assignGlobalVariables();
         setListeners();
 
@@ -56,6 +64,7 @@ public class HomeFragmentLoggedIn extends Fragment{
 
 
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+
         homeViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             if(user != null){
                 tvEmail.setText(user.getEmail());
@@ -64,6 +73,10 @@ public class HomeFragmentLoggedIn extends Fragment{
 
         return view;
     }
+
+
+
+
 
     private void assignGlobalVariables(){
         profileButton = view.findViewById(R.id.profileButton);
@@ -128,7 +141,11 @@ public class HomeFragmentLoggedIn extends Fragment{
 //        TODO: logout logic
         homeViewModel.setUser(null);
         logoutDialog.dismiss();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
+        NavController navController = navHostFragment.getNavController();
+        NavDirections action = HomeFragmentLoggedInDirections.actionHomeFragmentLoggedInToHomeFragment();
+        navController.navigate(action);
+//        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
 
