@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.gre.aa5119a.timelearn.R;
-import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
+import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 

@@ -26,6 +26,7 @@ import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class HomeFragmentLoggedIn extends Fragment{
@@ -140,6 +141,9 @@ public class HomeFragmentLoggedIn extends Fragment{
 
 //        TODO: logout logic
         homeViewModel.setUser(null);
+        bottomNavigation.getMenu().clear();
+        bottomNavigation.inflateMenu(R.menu.bottom_navigation);
+
         logoutDialog.dismiss();
 
         NavController navController = navHostFragment.getNavController();

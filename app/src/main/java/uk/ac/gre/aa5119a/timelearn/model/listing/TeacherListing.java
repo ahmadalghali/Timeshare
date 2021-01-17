@@ -1,14 +1,14 @@
-package uk.ac.gre.aa5119a.timelearn.model;
+package uk.ac.gre.aa5119a.timelearn.model.listing;
 
 import java.util.List;
 
-import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
+import uk.ac.gre.aa5119a.timelearn.model.User;
 
 public class TeacherListing {
 
     private int id;
     private Subject subject;
-    private User teacher;
+    private int userId;
 
     private String title;
     private String description;
@@ -16,9 +16,9 @@ public class TeacherListing {
     private List<String> teachingStyles;
     private List<String> daysAvailable;
 
-    public TeacherListing(Subject subject, User teacher, String title, String description, String imageId, List<String> teachingStyles, List<String> daysAvailable) {
+    public TeacherListing(Subject subject, int userId, String title, String description, String imageId, List<String> teachingStyles, List<String> daysAvailable) {
         this.subject = subject;
-        this.teacher = teacher;
+        this.userId = userId;
         this.title = title;
         this.description = description;
         this.imageId = imageId;
@@ -43,12 +43,12 @@ public class TeacherListing {
         this.subject = subject;
     }
 
-    public User getTeacher() {
-        return teacher;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setTeacher(User teacher) {
-        this.teacher = teacher;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -97,7 +97,7 @@ public class TeacherListing {
         return "TeacherListing{" +
                 "id=" + id +
                 ", subject=" + subject +
-                ", teacher=" + teacher +
+
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", imageId=" + imageId +

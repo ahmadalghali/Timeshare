@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.academy.LearnListingsFragment"
+    >
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="370dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_white"
+        android:backgroundTint="#68828282"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_blue" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListings"
+        android:layout_width="426dp"
+        android:layout_height="803dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvListingCount"
+        tools:listitem="@layout/item_teacher_listing" />
+
+    <TextView
+        android:id="@+id/tvListingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Showing 6 Classes "
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <TextView
+        android:id="@+id/tvSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Physics"
+        android:textColor="#484848"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivSubjectIcon"
+        app:layout_constraintStart_toEndOf="@+id/ivSubjectIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivSubjectIcon" />
+
+    <ImageView
+        android:id="@+id/ivSubjectIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_physics"
+        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintStart_toEndOf="@+id/backBtn"
+        app:layout_constraintTop_toTopOf="@+id/backBtn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

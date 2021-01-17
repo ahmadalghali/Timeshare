@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134696100302",
+    "project_id": "timeshare-1012b",
+    "storage_bucket": "timeshare-1012b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134696100302:android:d8d5bb73d6086eeed40b9f",
+        "android_client_info": {
+          "package_name": "uk.ac.gre.aa5119a.timelearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134696100302-cjtkut6q95upncumc4gkdc84f7sao51p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO-htPyhmLiCr4048X8immSRr36DiI1nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134696100302-cjtkut6q95upncumc4gkdc84f7sao51p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

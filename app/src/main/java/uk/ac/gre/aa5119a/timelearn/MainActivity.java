@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.account.AccountFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragment;
@@ -20,6 +22,7 @@ import uk.ac.gre.aa5119a.timelearn.fragment.notifications.NotificationsFragment;
 import uk.ac.gre.aa5119a.timelearn.fragment.search.SearchFragment;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static NavHostFragment navHostFragment;
 
+    public static TimeShareApi timeShareApi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +46,20 @@ public class MainActivity extends AppCompatActivity {
         assignGlobalVariables();
         setUpNavigation();
 
+        initRetrofit();
+
     }
 
+    private void initRetrofit(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://timeshare-backend.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        timeShareApi = retrofit.create(TimeShareApi.class);
+
+
+    }
 
     public void setUpNavigation() {
 

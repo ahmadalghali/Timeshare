@@ -156,8 +156,12 @@ public class LoginDialog extends DialogFragment {
     }
 
     private void signInButtonClicked(){
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.setMessage("Logging in...");
+        loadingDialog.startLoadingDialog();
 
         if(areFieldsEmpty()){
+            loadingDialog.dismissDialog();
             return;
         }
 
@@ -166,13 +170,17 @@ public class LoginDialog extends DialogFragment {
 
         Call<LoginResponse> call = timeShareApi.login(new User(email, password));
 
+
+
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                loadingDialog.dismissDialog();
 
                 if(!response.isSuccessful()){
                     Snackbar.make(getActivity().findViewById(android.R.id.content), "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
 //                    showSnackBar("Error: " + response.code());
+                    loadingDialog.dismissDialog();
                     return;
                 }
 
@@ -180,6 +188,7 @@ public class LoginDialog extends DialogFragment {
                 LoginResponse loginResponse = response.body();
 
                 if(loginResponse.getMessage().equals("logged in")){
+
 
                     homeViewModel.setUser(loginResponse.getUser());
 //                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragmentLoggedIn()).commit();
@@ -191,37 +200,29 @@ public class LoginDialog extends DialogFragment {
 
                     bottomNavigation.getMenu().clear();
                     bottomNavigation.inflateMenu(R.menu.bottom_navigation_logged_in);
+
                     dismiss();
 
-//getActivity().findViewById(android.R.id.content)
                     Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG);
-
-//                    Snackbar snack = Snackbar.make(getActivity().findViewById(R.id.snackBarArea),
-//                            "Welcome " + loginResponse.getUser().getEmail(), Snackbar.LENGTH_LONG);
-//                    CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)
-//                            snack.getView().getLayoutParams();
-//                    params.setMargins(0, 0, 0, bottomNavigation.getHeight() + 50);
-//                    snack.getView().setLayoutParams(params);
-//                    snack.show();
 
                     snackbar.setAnchorView(bottomNavigation);
                     snackbar.show();
 
-//                    showSnackBar("Welcome " + loginResponse.getUser().getEmail());
-
-//                    Toast.makeText(getActivity(), "Welcome " + loginResponse.getUser().getEmail() , Toast.LENGTH_LONG).show();
-
 
                 } else if(loginResponse.getMessage().equals("incorrect password")){
+
                     etPassword.setError("Incorrect password");
 
                 } else if(loginResponse.getMessage().equals("user does not exist")){
+
                     etEmail.setError("User not found, register.");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                loadingDialog.dismissDialog();
+
                 Snackbar.make(getActivity().findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
 //                showSnackBar(t.getMessage());
             }

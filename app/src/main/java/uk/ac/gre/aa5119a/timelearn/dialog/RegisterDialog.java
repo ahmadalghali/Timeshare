@@ -33,6 +33,8 @@ import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
+
 public class RegisterDialog extends DialogFragment {
 
 
@@ -59,6 +61,8 @@ public class RegisterDialog extends DialogFragment {
     private FrameLayout mainActivityFrameLayout;
 
 
+
+    private LoadingDialog loadingDialog;
 
     @NonNull
     @Override
@@ -107,6 +111,8 @@ public class RegisterDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 buttonEffect(v, BLUE_PRESSED_COLOR);
+
+
                 registerButtonClicked();
             }
         });
@@ -161,11 +167,19 @@ public class RegisterDialog extends DialogFragment {
             etConfirmPassword.setError(null);
         }
 
+        loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.setMessage("Registering...");
+        loadingDialog.startLoadingDialog();
+
         Call<RegisterResponse> call = timeShareApi.register(new User(email, password));
+
+
 
         call.enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+
+                loadingDialog.dismissDialog();
 
                 if(!response.isSuccessful()){
                     Snackbar.make(mainActivityFrameLayout, "Error: " + response.errorBody() + " Code: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
@@ -184,10 +198,11 @@ public class RegisterDialog extends DialogFragment {
 
 //                    show registered toast message
                     showLoginDialog();
-                    Toast.makeText(getActivity(), "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
+//                    dismiss();
+//                    Toast.makeText(getActivity(), "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
 
 
-                    Snackbar.make(mainActivityFrameLayout, "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
 //                    Toast.makeText(RegisterActivity.this, "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
                 }
 
@@ -195,8 +210,9 @@ public class RegisterDialog extends DialogFragment {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                loadingDialog.dismissDialog();
 
-                Snackbar.make(mainActivityFrameLayout,t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
             }
         });
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.adapter.CategoriesAdapter;
-import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
+import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
@@ -108,9 +108,19 @@ public class CategoriesAcademicFragment extends Fragment {
 
                 academyViewModel.setSubjectChosen(subject);
 
-                NavController navController = navHostFragment.getNavController();
-                NavDirections action = CategoriesAcademicFragmentDirections.actionCategoriesAcademicFragmentToTeachSubjectDetailsFragment();
-                navController.navigate(action);
+                if(academyViewModel.getEducationType().getValue().toLowerCase().equals("learn")){
+
+                    NavController navController = navHostFragment.getNavController();
+                    NavDirections action = CategoriesAcademicFragmentDirections.actionCategoriesAcademicFragmentToTeachSubjectDetailsFragment();
+                    navController.navigate(action);
+
+                }else if(academyViewModel.getEducationType().getValue().toLowerCase().equals("teach")){
+
+                    NavController navController = navHostFragment.getNavController();
+                    NavDirections action = CategoriesAcademicFragmentDirections.actionCategoriesAcademicFragmentToTeachSubjectDetailsFragment();
+                    navController.navigate(action);
+
+                }
 
 //                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeachSubjectDetailsFragment()).commit();
             }

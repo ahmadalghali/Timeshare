@@ -1,4 +1,4 @@
-package uk.ac.gre.aa5119a.timelearn.model.ui;
+package uk.ac.gre.aa5119a.timelearn.model.listing;
 
 public class Subject {
 

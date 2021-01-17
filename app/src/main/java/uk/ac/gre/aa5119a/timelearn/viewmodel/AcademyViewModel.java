@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import uk.ac.gre.aa5119a.timelearn.model.ui.Subject;
+import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 
 public class AcademyViewModel extends ViewModel {
 
