@@ -2,30 +2,36 @@ package uk.ac.gre.aa5119a.timelearn.model.listing;
 
 import java.util.List;
 
-import uk.ac.gre.aa5119a.timelearn.model.User;
-
 public class TeacherListing {
 
     private int id;
-    private Subject subject;
+    private int subjectId;
     private int userId;
-
     private String title;
     private String description;
     private String imageId;
-    private List<String> teachingStyles;
-    private List<String> daysAvailable;
+    private double timeRate;
+    private List<Integer> teachingStyleIds;
+    private List<Integer> availabilityIds;
 
-    public TeacherListing(Subject subject, int userId, String title, String description, String imageId, List<String> teachingStyles, List<String> daysAvailable) {
-        this.subject = subject;
+    public TeacherListing(int subjectId, int userId, String title, String description, String imageId, double timeRate, List<Integer> teachingStyleIds, List<Integer> availabilityIds) {
+        this.subjectId = subjectId;
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.imageId = imageId;
-        this.teachingStyles = teachingStyles;
-        this.daysAvailable = daysAvailable;
+        this.timeRate = timeRate;
+        this.teachingStyleIds = teachingStyleIds;
+        this.availabilityIds = availabilityIds;
     }
 
+    public double getTimeRate() {
+        return timeRate;
+    }
+
+    public void setTimeRate(double timeRate) {
+        this.timeRate = timeRate;
+    }
 
     public int getId() {
         return id;
@@ -35,13 +41,14 @@ public class TeacherListing {
         this.id = id;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
+
 
     public int getUserId() {
         return userId;
@@ -75,34 +82,35 @@ public class TeacherListing {
         this.imageId = imageId;
     }
 
-    public List<String> getTeachingStyles() {
-        return teachingStyles;
+
+    public List<Integer> getTeachingStyleIds() {
+        return teachingStyleIds;
     }
 
-    public void setTeachingStyles(List<String> teachingStyles) {
-        this.teachingStyles = teachingStyles;
+    public void setTeachingStyleIds(List<Integer> teachingStyleIds) {
+        this.teachingStyleIds = teachingStyleIds;
     }
 
-    public List<String> getDaysAvailable() {
-        return daysAvailable;
+    public List<Integer> getAvailabilityIds() {
+        return availabilityIds;
     }
 
-    public void setDaysAvailable(List<String> daysAvailable) {
-        this.daysAvailable = daysAvailable;
+    public void setAvailabilityIds(List<Integer> availabilityIds) {
+        this.availabilityIds = availabilityIds;
     }
-
 
     @Override
     public String toString() {
         return "TeacherListing{" +
                 "id=" + id +
-                ", subject=" + subject +
-
+                ", subject=" + subjectId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", imageId=" + imageId +
-                ", teachingStyles=" + teachingStyles +
-                ", daysAvailable=" + daysAvailable +
+                ", imageId='" + imageId + '\'' +
+                ", timeRate=" + timeRate +
+                ", teachingStyles=" + teachingStyleIds +
+                ", daysAvailable=" + availabilityIds +
+                ", user=" + userId +
                 '}';
     }
 }

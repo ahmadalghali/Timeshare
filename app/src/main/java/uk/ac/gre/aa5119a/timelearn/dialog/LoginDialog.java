@@ -1,8 +1,6 @@
 package uk.ac.gre.aa5119a.timelearn.dialog;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -13,15 +11,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,11 +28,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
-import uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragmentDirections;
-import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentLoggedIn;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
-import uk.ac.gre.aa5119a.timelearn.web.LoginResponse;
+import uk.ac.gre.aa5119a.timelearn.web.response.LoginResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;

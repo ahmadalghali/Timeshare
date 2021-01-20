@@ -12,6 +12,9 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.fragment.academy.AcademyFragment;
@@ -51,10 +54,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRetrofit(){
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://timeshare-backend.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
+
+
 
         timeShareApi = retrofit.create(TimeShareApi.class);
 

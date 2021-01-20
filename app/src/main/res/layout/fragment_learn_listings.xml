@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragment.academy.LearnListingsFragment"
+    android:paddingBottom="40dp"
     >
 
     <Button
@@ -30,12 +32,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListings"
-        android:layout_width="426dp"
-        android:layout_height="803dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="429dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvListingCount"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_teacher_listing" />
 
     <TextView
@@ -45,11 +49,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Showing 6 Classes "
+        android:text=""
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        />
 
     <TextView
         android:id="@+id/tvSubject"

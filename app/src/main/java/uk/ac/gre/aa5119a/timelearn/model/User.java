@@ -11,7 +11,10 @@ public class User implements Parcelable, Serializable {
     private int id;
     private String email;
     private String password;
-//    private boolean loggedIn;
+    private String city;
+    private String profileImageUrl;
+    private double ratingScore;
+    private int ratingCount;
 
     protected User() {
     }
@@ -19,7 +22,13 @@ public class User implements Parcelable, Serializable {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-//        this.loggedIn = false;
+
+    }
+    public User(String email, String password, String city, String profileImageUrl) {
+        this.email = email;
+        this.password = password;
+        this.city = city;
+        this.profileImageUrl = profileImageUrl;
     }
 
     protected User(Parcel in) {
@@ -56,13 +65,29 @@ public class User implements Parcelable, Serializable {
         this.password = password;
     }
 
-//    public boolean isLoggedIn() {
-//        return loggedIn;
-//    }
-//
-//    public void setLoggedIn(boolean loggedIn) {
-//        this.loggedIn = loggedIn;
-//    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public double getRatingScore() {
+        return ratingScore;
+    }
+
+    public void setRatingScore(double ratingScore) {
+        this.ratingScore = ratingScore;
+    }
 
     public int getId() {
         return id;
@@ -70,6 +95,14 @@ public class User implements Parcelable, Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
     }
 
     @Override

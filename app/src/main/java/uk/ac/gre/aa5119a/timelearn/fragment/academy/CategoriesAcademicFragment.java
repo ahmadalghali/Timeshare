@@ -85,8 +85,8 @@ public class CategoriesAcademicFragment extends Fragment {
         recyclerview = view.findViewById(R.id.recyclerview);
         categories = new ArrayList<>();
         categories.add(new Subject(1,R.drawable.ic_maths, "Maths"));
-        categories.add(new Subject(2,R.drawable.ic_chemistry, "Chemistry"));
-        categories.add(new Subject(3,R.drawable.ic_physics, "Physics"));
+        categories.add(new Subject(2,R.drawable.ic_physics, "Physics"));
+        categories.add(new Subject(3,R.drawable.ic_chemistry, "Chemistry"));
         categories.add(new Subject(4,R.drawable.ic_computer, "Computing"));
         categories.add(new Subject(5,R.drawable.ic_english, "English"));
 
@@ -111,7 +111,7 @@ public class CategoriesAcademicFragment extends Fragment {
                 if(academyViewModel.getEducationType().getValue().toLowerCase().equals("learn")){
 
                     NavController navController = navHostFragment.getNavController();
-                    NavDirections action = CategoriesAcademicFragmentDirections.actionCategoriesAcademicFragmentToTeachSubjectDetailsFragment();
+                    NavDirections action = CategoriesAcademicFragmentDirections.actionCategoriesAcademicFragmentToLearnListingsFragment2();
                     navController.navigate(action);
 
                 }else if(academyViewModel.getEducationType().getValue().toLowerCase().equals("teach")){

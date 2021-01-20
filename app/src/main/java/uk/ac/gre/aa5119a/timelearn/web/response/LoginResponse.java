@@ -1,13 +1,15 @@
-package uk.ac.gre.aa5119a.timelearn.web;
+package uk.ac.gre.aa5119a.timelearn.web.response;
 
 import uk.ac.gre.aa5119a.timelearn.model.User;
 
-public class RegisterResponse {
+public class LoginResponse {
+
     private User user;
     private String message;
 
-    public RegisterResponse() {
-
+    public LoginResponse() {
+//        this.user = user;
+//        this.message = message;
     }
 
     public User getUser() {

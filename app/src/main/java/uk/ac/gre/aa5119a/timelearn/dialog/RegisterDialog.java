@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
-import uk.ac.gre.aa5119a.timelearn.web.RegisterResponse;
+import uk.ac.gre.aa5119a.timelearn.web.response.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
@@ -226,8 +225,6 @@ public class RegisterDialog extends DialogFragment {
                 .build();
 
         timeShareApi = retrofit.create(TimeShareApi.class);
-
-
     }
 
     public static void buttonEffect(View button, String hexColor){

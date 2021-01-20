@@ -30,8 +30,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -55,13 +53,11 @@ import retrofit2.Response;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoadingDialog;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
-import uk.ac.gre.aa5119a.timelearn.model.listing.Availability;
 import uk.ac.gre.aa5119a.timelearn.model.listing.ImageUpload;
-import uk.ac.gre.aa5119a.timelearn.model.listing.TeacherListing;
 import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
-import uk.ac.gre.aa5119a.timelearn.web.TeacherListingResponse;
+import uk.ac.gre.aa5119a.timelearn.web.response.TeacherListingResponse;
 import uk.ac.gre.aa5119a.timelearn.web.request.TeacherListingRequest;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
@@ -199,8 +195,8 @@ public class TeachSubjectDetailsFragment extends Fragment {
                     Toast.makeText(getContext(), "Please wait...", Toast.LENGTH_SHORT).show();
                 } else {
                     loadingDialog = new LoadingDialog(getActivity());
-                    loadingDialog.setMessage("Uploading Image...");
                     loadingDialog.startLoadingDialog();
+
 
                     uploadImage();
                 }
@@ -233,10 +229,9 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
     private void addListing() {
 
-
-
-
         if (!areFieldsEmpty()) {
+
+            loadingDialog.setMessage("Creating Listing...");
 
             getUserInput();
 
@@ -316,6 +311,8 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
 
         if (imageUri != null) {
+            loadingDialog.setMessage("Uploading Image...");
+
             StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
             uploadtask = fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

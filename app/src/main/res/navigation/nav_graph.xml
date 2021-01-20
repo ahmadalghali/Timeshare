@@ -60,7 +60,9 @@
             app:exitAnim="@anim/to_left2" />
         <action
             android:id="@+id/action_categoriesAcademicFragment_to_learnListingsFragment2"
-            app:destination="@id/learnListingsFragment2" />
+            app:destination="@id/learnListingsFragment2"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
     </fragment>
     <fragment
         android:id="@+id/teachSubjectDetailsFragment"
@@ -138,6 +140,24 @@
         tools:layout="@layout/fragment_learn_listings" >
         <action
             android:id="@+id/action_learnListingsFragment2_to_categoriesAcademicFragment"
-            app:destination="@id/categoriesAcademicFragment" />
+            app:destination="@id/categoriesAcademicFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_learnListingsFragment2_to_listingDetails"
+            app:destination="@id/listingDetails"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
+    <fragment
+        android:id="@+id/listingDetails"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.academy.ListingDetails"
+        android:label="fragment_listing_details"
+        tools:layout="@layout/fragment_listing_details" >
+        <action
+            android:id="@+id/action_listingDetails_to_learnListingsFragment2"
+            app:destination="@id/learnListingsFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
 </navigation>
