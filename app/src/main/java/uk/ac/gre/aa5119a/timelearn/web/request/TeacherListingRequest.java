@@ -4,24 +4,23 @@ import java.util.List;
 
 public class TeacherListingRequest {
 
-    private int id;
     private int subjectId;
     private int userId;
     private String title;
     private String description;
-    private String imageId;
+    private String qualificationImageUrl;
     private Double timeRate;
 
     private List<Integer> availabilityIds;
     private List<Integer> teachingStyleIds;
 
 
-    public TeacherListingRequest(int subjectId, int userId, String title, String description, String imageId, Double timeRate, List<Integer> availabilityIds, List<Integer> teachingStyleIds) {
+    public TeacherListingRequest(int subjectId, int userId, String title, String description, String qualificationImageUrl, Double timeRate, List<Integer> availabilityIds, List<Integer> teachingStyleIds) {
         this.subjectId = subjectId;
         this.userId = userId;
         this.title = title;
         this.description = description;
-        this.imageId = imageId;
+        this.qualificationImageUrl = qualificationImageUrl;
         this.timeRate = timeRate;
         this.availabilityIds = availabilityIds;
         this.teachingStyleIds = teachingStyleIds;
@@ -29,13 +28,7 @@ public class TeacherListingRequest {
 
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getSubjectId() {
         return subjectId;
@@ -69,12 +62,12 @@ public class TeacherListingRequest {
         this.description = description;
     }
 
-    public String getImageId() {
-        return imageId;
+    public String getQualificationImageUrl() {
+        return qualificationImageUrl;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
+    public void setQualificationImageUrl(String qualificationImageUrl) {
+        this.qualificationImageUrl = qualificationImageUrl;
     }
 
     public List<Integer> getAvailabilityIds() {
@@ -101,15 +94,15 @@ public class TeacherListingRequest {
         this.timeRate = timeRate;
     }
 
+
     @Override
     public String toString() {
         return "TeacherListingRequest{" +
-                "id=" + id +
                 ", subjectId=" + subjectId +
                 ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", imageId='" + imageId + '\'' +
+                ", qualificationImageUrl='" + qualificationImageUrl + '\'' +
                 ", timeRate=" + timeRate +
                 ", availabilityIds=" + availabilityIds +
                 ", teachingStyleIds=" + teachingStyleIds +

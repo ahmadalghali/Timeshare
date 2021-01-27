@@ -16,22 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
-import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialogDirections;
 import uk.ac.gre.aa5119a.timelearn.dialog.RegisterDialog;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private UserViewModel userViewModel;
     private ImageView profileButton;
 
     private View view;
@@ -56,7 +54,7 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         assignGlobalVariables();
-//        if(homeViewModel.getUser().getValue() != null){
+//        if(userViewModel.getUser().getValue() != null){
 //            NavController navController = navHostFragment.getNavController();
 //            NavDirections action = HomeFragmentDirections.actionHomeFragmentToHomeFragmentLoggedIn();
 //            navController.navigate(action);
@@ -74,7 +72,7 @@ public class HomeFragment extends Fragment {
     private void assignGlobalVariables(){
         homeFragmentLayout = view.findViewById(R.id.homeFragmentLayout);
         profileButton = view.findViewById(R.id.profileButton);
-        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
 //        navController = Navigation.findNavController(view);
 

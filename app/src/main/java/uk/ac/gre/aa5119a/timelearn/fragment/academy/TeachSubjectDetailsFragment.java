@@ -52,11 +52,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoadingDialog;
-import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
+import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog2;
 import uk.ac.gre.aa5119a.timelearn.model.listing.ImageUpload;
 import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.TeacherListingResponse;
 import uk.ac.gre.aa5119a.timelearn.web.request.TeacherListingRequest;
 
@@ -69,7 +69,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
     private View view;
     private AcademyViewModel academyViewModel;
-    private HomeViewModel homeViewModel;
+    private UserViewModel userViewModel;
 
     private TextView tvSubject;
 
@@ -138,7 +138,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
     private void assignGlobalVariables() {
 
         academyViewModel = new ViewModelProvider(requireActivity()).get(AcademyViewModel.class);
-        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         tvSubject = view.findViewById(R.id.tvSubject);
         backBtn = view.findViewById(R.id.backBtn);
@@ -235,18 +235,19 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
             getUserInput();
 
-            if (homeViewModel.getUser().getValue() != null) {
+            if (userViewModel.getUser().getValue() != null) {
 
                 TeacherListingRequest teacherListingRequest;
 //                uploadImage();
                if(imageUri != null){
-                    teacherListingRequest = new TeacherListingRequest(subject.getSubjectId(), homeViewModel.getUser().getValue().getId(), title, description, imageUpload.getImageUrl(), timeRate, teachingStyles, daysOfAvailability);
+                    teacherListingRequest = new TeacherListingRequest(subject.getSubjectId(), userViewModel.getUser().getValue().getId(), title, description, imageUpload.getImageUrl(), timeRate, teachingStyles, daysOfAvailability);
                } else{
-                   teacherListingRequest = new TeacherListingRequest(subject.getSubjectId(), homeViewModel.getUser().getValue().getId(), title, description, null, timeRate, teachingStyles, daysOfAvailability);
+                   teacherListingRequest = new TeacherListingRequest(subject.getSubjectId(), userViewModel.getUser().getValue().getId(), title, description, null, timeRate, teachingStyles, daysOfAvailability);
                }
 
 
                 Log.d("request", teacherListingRequest.toString());
+
 
 
                 Call<TeacherListingResponse> call = timeShareApi.addListing(teacherListingRequest);
@@ -288,14 +289,13 @@ public class TeachSubjectDetailsFragment extends Fragment {
             } else {
                 loadingDialog.dismissDialog();
 
-                Snackbar snackbar = Snackbar.make(view, "Please sign in first", BaseTransientBottomBar.LENGTH_INDEFINITE);
+                Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "Please sign in first", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation);
 
                 snackbar.setAction("SIGN IN", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LoginDialog loginDialog = new LoginDialog();
-                        loginDialog.setTargetFragment(getTargetFragment(), 1);
-                        loginDialog.show(getActivity().getSupportFragmentManager(), "LoginDialog");
+                        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel);
+                        loginDialog.show();
                     }
                 });
                 snackbar.show();
@@ -303,7 +303,9 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
 
         } else {
-            Snackbar.make(view, "Please fill in the required fields", BaseTransientBottomBar.LENGTH_LONG).show();
+            loadingDialog.dismissDialog();
+
+            Snackbar.make(getActivity().findViewById(android.R.id.content), "Please fill in the required fields", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
         }
     }
 

@@ -28,7 +28,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.User;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
@@ -38,7 +38,7 @@ public class RegisterDialog extends DialogFragment {
 
 
 
-    private HomeViewModel homeViewModel;
+    private UserViewModel userViewModel;
 
     private Dialog registerDialog;
 

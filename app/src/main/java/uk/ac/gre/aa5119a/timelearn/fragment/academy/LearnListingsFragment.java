@@ -1,9 +1,6 @@
 package uk.ac.gre.aa5119a.timelearn.fragment.academy;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -33,7 +29,7 @@ import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.adapter.LearnClassesAdapter;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoadingDialog;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.TeacherListingResponse;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
@@ -44,7 +40,7 @@ public class LearnListingsFragment extends Fragment {
 
     private View view;
     private AcademyViewModel academyViewModel;
-    private HomeViewModel homeViewModel;
+    private UserViewModel userViewModel;
 
 
     private ImageView backBtn;
@@ -73,7 +69,7 @@ public class LearnListingsFragment extends Fragment {
     private void assignGlobalVariables(){
 
         academyViewModel = new ViewModelProvider(getActivity()).get(AcademyViewModel.class);
-        homeViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
+        userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
         backBtn = view.findViewById(R.id.backBtn);
         ivSubjectIcon = view.findViewById(R.id.ivSubjectIcon);
@@ -121,18 +117,18 @@ public class LearnListingsFragment extends Fragment {
             @Override
             public void onClassClicked(int position) {
 
-                ConstraintLayout listItemLayout = view.findViewById(R.id.listItemLayout);
-                listItemLayout.setBackgroundColor(Color.parseColor("#dbdbdb"));
-
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Do something after 300ms
-                        listItemLayout.setBackgroundColor(Color.TRANSPARENT);
-
-                    }
-                }, 100);
+//                ConstraintLayout listItemLayout = view.findViewById(R.id.listItemLayout);
+//                listItemLayout.setBackgroundColor(Color.parseColor("#dbdbdb"));
+//
+//                final Handler handler = new Handler(Looper.getMainLooper());
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Do something after 300ms
+//                        listItemLayout.setBackgroundColor(Color.TRANSPARENT);
+//
+//                    }
+//                }, 100);
 
                 TeacherListingResponse listingResponse = responseList.get(position);
 

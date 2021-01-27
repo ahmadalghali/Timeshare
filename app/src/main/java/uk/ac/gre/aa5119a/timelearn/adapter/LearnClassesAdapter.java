@@ -32,7 +32,6 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
 
     List<TeacherListingResponse> responseList = new ArrayList<>();
 
-//    List<TeacherListingResponse> responseList = new ArrayList<>();
 
     private OnClassClickedListener onClassClickedListener;
 
@@ -68,12 +67,11 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
             Picasso.get()
                     .load(response.getUser().getProfileImageUrl())
                     .placeholder(R.drawable.ic_account)
-                    .resize(150, 150)
-                    .centerCrop()
+
                     .into(holder.ivTeacherPhoto);
         }else{
 
-            holder.ivTeacherPhoto.setImageResource(R.drawable.ic_account);
+            holder.ivTeacherPhoto.setImageResource(R.drawable.default_user_image);
 
         }
 
@@ -133,6 +131,22 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
+                    ConstraintLayout listItemLayout = itemView.findViewById(R.id.listItemLayout);
+                    listItemLayout.setBackgroundColor(Color.parseColor("#dbdbdb"));
+
+                    final Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Do something after 300ms
+                            listItemLayout.setBackgroundColor(Color.TRANSPARENT);
+
+                        }
+                    }, 3000);
+
+
                     if(onClassClickedListener != null){
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION){

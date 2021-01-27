@@ -1,21 +1,16 @@
 package uk.ac.gre.aa5119a.timelearn.dialog;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -25,27 +20,21 @@ import com.google.android.material.textfield.TextInputLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.LoginResponse;
-import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
-import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 
-public class LoginDialog extends DialogFragment {
+public class LoginDialog2{
 
     private TextInputLayout etEmail;
     private TextInputLayout etPassword;
     private Button signInButton;
     private TextView registerButton;
 
-    private TimeShareApi timeShareApi;
-
-    private FrameLayout mainActivityFrameLayout;
 
     private UserViewModel userViewModel;
 
@@ -54,12 +43,15 @@ public class LoginDialog extends DialogFragment {
     private View view;
 
     private static final String BLUE_PRESSED_COLOR = "#006fab";
+    private Activity activity;
 
+    public LoginDialog2(Activity activity, UserViewModel userViewModel){
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        this.activity = activity;
+        this.userViewModel = userViewModel;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
         view = inflater.inflate(R.layout.dialog_login, null);
 
         builder.setView(view);
@@ -71,13 +63,7 @@ public class LoginDialog extends DialogFragment {
 
         assignGlobalVariables();
         initListeners();
-        initRetrofit();
-
-
-        return loginDialog;
     }
-
-
 
 
     private void assignGlobalVariables(){
@@ -85,8 +71,6 @@ public class LoginDialog extends DialogFragment {
         etPassword = view.findViewById(R.id.etPassword);
         signInButton = view.findViewById(R.id.signInButton);
         registerButton = view.findViewById(R.id.registerButton);
-        mainActivityFrameLayout = view.findViewById(R.id.fragment_container);
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     private void initListeners(){
@@ -102,30 +86,21 @@ public class LoginDialog extends DialogFragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRegisterDialog();
+//                showRegisterDialog();
             }
         });
     }
 
 
-    private void showRegisterDialog(){
-        RegisterDialog registerDialog = new RegisterDialog();
-        registerDialog.setTargetFragment(getTargetFragment(), 1);
-        dismiss();
-        registerDialog.show(getActivity().getSupportFragmentManager(), "RegisterDialog");
-
-    }
-
-    private void initRetrofit(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://timeshare-backend.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        timeShareApi = retrofit.create(TimeShareApi.class);
+//    private void showRegisterDialog(){
+//        RegisterDialog registerDialog = new RegisterDialog();
+//        registerDialog.setTargetFragment(getTargetFragment(), 1);
+//        dismiss();
+//        registerDialog.show(getActivity().getSupportFragmentManager(), "RegisterDialog");
+//
+//    }
 
 
-    }
 
 
     private Boolean areFieldsEmpty(){
@@ -149,7 +124,7 @@ public class LoginDialog extends DialogFragment {
     }
 
     private void signInButtonClicked(){
-        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        LoadingDialog loadingDialog = new LoadingDialog(activity);
         loadingDialog.setMessage("Logging in...");
         loadingDialog.startLoadingDialog();
 
@@ -171,8 +146,7 @@ public class LoginDialog extends DialogFragment {
                 loadingDialog.dismissDialog();
 
                 if(!response.isSuccessful()){
-                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
-//                    showSnackBar("Error: " + response.code());
+                    Snackbar.make(activity.findViewById(android.R.id.content), "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
                     loadingDialog.dismissDialog();
                     return;
                 }
@@ -184,11 +158,9 @@ public class LoginDialog extends DialogFragment {
 
 
                     userViewModel.setUser(loginResponse.getUser());
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragmentLoggedIn()).commit();
 
-                    NavController navController = navHostFragment.getNavController();
-                    NavDirections action = LoginDialogDirections.actionLoginDialogToHomeFragmentLoggedIn();
-                    navController.navigate(action);
+                    dismiss();
+
 
 
                     bottomNavigation.getMenu().clear();
@@ -196,8 +168,7 @@ public class LoginDialog extends DialogFragment {
 
                     dismiss();
 
-                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG);
-
+                    Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG);
                     snackbar.setAnchorView(bottomNavigation);
                     snackbar.show();
 
@@ -216,7 +187,7 @@ public class LoginDialog extends DialogFragment {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 loadingDialog.dismissDialog();
 
-                Snackbar.make(getActivity().findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(activity.findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
 //                showSnackBar(t.getMessage());
             }
         });
@@ -244,15 +215,12 @@ public class LoginDialog extends DialogFragment {
         });
     }
 
-//    private void showSnackBar(String message){
-//        Snackbar snack = Snackbar.make(getActivity().findViewById(android.R.id.content),
-//                "Your message", Snackbar.LENGTH_LONG);
-//        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)
-//                snack.getView().getLayoutParams();
-//        params.setMargins(0, 0, 0, 50);
-//        snack.getView().setLayoutParams(params);
-//        snack.setAnchorView(view);
-//        snack.show();
-//    }
+    public void show(){
+        loginDialog.show();
+    }
+
+    public void dismiss(){
+        loginDialog.dismiss();
+    }
 
 }

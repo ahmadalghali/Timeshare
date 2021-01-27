@@ -9,17 +9,17 @@ public class TeacherListing {
     private int userId;
     private String title;
     private String description;
-    private String imageId;
+    private String qualificationImageUrl;
     private double timeRate;
     private List<Integer> teachingStyleIds;
     private List<Integer> availabilityIds;
 
-    public TeacherListing(int subjectId, int userId, String title, String description, String imageId, double timeRate, List<Integer> teachingStyleIds, List<Integer> availabilityIds) {
+    public TeacherListing(int subjectId, int userId, String title, String description, String qualificationImageUrl, double timeRate, List<Integer> teachingStyleIds, List<Integer> availabilityIds) {
         this.subjectId = subjectId;
         this.userId = userId;
         this.title = title;
         this.description = description;
-        this.imageId = imageId;
+        this.qualificationImageUrl = qualificationImageUrl;
         this.timeRate = timeRate;
         this.teachingStyleIds = teachingStyleIds;
         this.availabilityIds = availabilityIds;
@@ -75,11 +75,11 @@ public class TeacherListing {
     }
 
     public String getImage() {
-        return imageId;
+        return qualificationImageUrl;
     }
 
     public void setImage(int image) {
-        this.imageId = imageId;
+        this.qualificationImageUrl = qualificationImageUrl;
     }
 
 
@@ -106,7 +106,7 @@ public class TeacherListing {
                 ", subject=" + subjectId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", imageId='" + imageId + '\'' +
+                ", imageId='" + qualificationImageUrl + '\'' +
                 ", timeRate=" + timeRate +
                 ", teachingStyles=" + teachingStyleIds +
                 ", daysAvailable=" + availabilityIds +

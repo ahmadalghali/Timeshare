@@ -15,6 +15,9 @@ public class User implements Parcelable, Serializable {
     private String profileImageUrl;
     private double ratingScore;
     private int ratingCount;
+    private double timeCreditsCount;
+    private String firstname;
+
 
     protected User() {
     }
@@ -103,6 +106,23 @@ public class User implements Parcelable, Serializable {
 
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
+    }
+
+
+    public double getTimeCreditsCount() {
+        return timeCreditsCount;
+    }
+
+    public void setTimeCreditsCount(double timeCreditsCount) {
+        this.timeCreditsCount = timeCreditsCount;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     @Override

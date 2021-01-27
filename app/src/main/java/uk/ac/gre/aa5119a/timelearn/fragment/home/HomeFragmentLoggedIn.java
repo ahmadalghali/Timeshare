@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,9 +20,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 
 import uk.ac.gre.aa5119a.timelearn.R;
-import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialogDirections;
 import uk.ac.gre.aa5119a.timelearn.model.User;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.HomeViewModel;
+import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
@@ -47,7 +45,7 @@ public class HomeFragmentLoggedIn extends Fragment{
     private Button cancelButton;
     private Button logoutButton;
 
-    private HomeViewModel homeViewModel;
+    private UserViewModel userViewModel;
 
 
 
@@ -64,11 +62,13 @@ public class HomeFragmentLoggedIn extends Fragment{
        tvEmail = logoutDialog.findViewById(R.id.tvEmail);
 
 
-        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-        homeViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+        userViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             if(user != null){
                 tvEmail.setText(user.getEmail());
+
+                tvTimeCredits.setText("" + user.getTimeCreditsCount());
             }
         });
 
@@ -140,7 +140,7 @@ public class HomeFragmentLoggedIn extends Fragment{
     private void logoutButtonClicked(){
 
 //        TODO: logout logic
-        homeViewModel.setUser(null);
+        userViewModel.setUser(null);
         bottomNavigation.getMenu().clear();
         bottomNavigation.inflateMenu(R.menu.bottom_navigation);
 
@@ -157,9 +157,9 @@ public class HomeFragmentLoggedIn extends Fragment{
 //    @Override
 //    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 //        super.onActivityCreated(savedInstanceState);
-//        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+//        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 //
-//        homeViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
+//        userViewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
 //            @Override
 //            public void onChanged(User loggedInUser) {
 //                tvEmail.setText(loggedInUser.getEmail());
@@ -173,8 +173,8 @@ public class HomeFragmentLoggedIn extends Fragment{
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
-//        homeViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+//        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+//        userViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
 //            loggedInUser = user;
 //        });
 //    }

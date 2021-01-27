@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import uk.ac.gre.aa5119a.timelearn.model.User;
 
-public class HomeViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
 
     private MutableLiveData<User> user = new MutableLiveData<>();
 
@@ -18,8 +18,4 @@ public class HomeViewModel extends ViewModel {
     public LiveData<User> getUser(){
         return user;
     }
-
-
-
-
 }

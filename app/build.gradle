@@ -76,5 +76,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     apply plugin: "androidx.navigation.safeargs"
 
+//    websocket
+//    implementation 'tech.gusavila92:java-android-websocket-client:1.2.2'
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation group: 'com.pubnub', name: 'pubnub-gson', version: '4.25.0' // Add this
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
 
 }

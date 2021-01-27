@@ -7,8 +7,9 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="170dp"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
+        android:minWidth="150dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +18,9 @@
         android:padding="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
+
             android:layout_height="150dp"
             android:padding="10dp">
 
