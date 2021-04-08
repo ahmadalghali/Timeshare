@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://timeshare-backend.herokuapp.com/")
+//                .baseUrl("https://timeshare-backend.herokuapp.com/")
+                .baseUrl("http://192.168.0.11:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

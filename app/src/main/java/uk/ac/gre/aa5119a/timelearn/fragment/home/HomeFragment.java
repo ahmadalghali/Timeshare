@@ -19,8 +19,10 @@ import androidx.navigation.NavDirections;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog;
+import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog2;
 import uk.ac.gre.aa5119a.timelearn.dialog.RegisterDialog;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
@@ -89,9 +91,12 @@ public class HomeFragment extends Fragment {
 
     private void showLoginDialog(){
 
-        NavController navController = navHostFragment.getNavController();
-        NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginDialog();
-        navController.navigate(action);
+//        NavController navController = navHostFragment.getNavController();
+//        NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginDialog();
+//        navController.navigate(action);
+
+        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel);
+        loginDialog.show();
 
 //        loginDialog = new LoginDialog();
 ////

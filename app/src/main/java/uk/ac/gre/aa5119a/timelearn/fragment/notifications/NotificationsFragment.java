@@ -25,6 +25,10 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +59,10 @@ public class NotificationsFragment extends Fragment {
     NotificationAdapter adapter;
 
 
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,7 +75,17 @@ public class NotificationsFragment extends Fragment {
         return view;
     }
 
+//    Runnable getNotificationsRunnable = new Runnable() {
+//        public void run() {
+//            getNotifications();
+//        }
+//    };
+
     private void assignGlobalVariables() {
+
+//        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+//        executor.scheduleAtFixedRate(getNotificationsRunnable, 0, 5, TimeUnit.SECONDS);
+
         rvNotifications = view.findViewById(R.id.rvNotifications);
 
         rvNotifications.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -75,8 +93,19 @@ public class NotificationsFragment extends Fragment {
         adapter = new NotificationAdapter(getContext(), new NotificationAdapter.NotificationClickListener() {
             @Override
             public void onAcceptButtonClicked(int position, int classBookingId) {
-                Toast.makeText(getContext(), "Notification " + position + " Accepted", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Notification " + position + " Accepted", Toast.LENGTH_SHORT).show();
+                timeShareApi.setClassBookingAccepted(classBookingId, true).enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        getNotifications();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+
+                    }
+                });
+                getNotifications();
             }
 
             @Override
@@ -98,8 +127,23 @@ public class NotificationsFragment extends Fragment {
             }
 
             @Override
-            public void onViewButtonClicked(int position, int classId) {
+            public void onViewButtonClicked(int position, int classBookingId) {
 
+
+                System.out.println("deleting classBookingId: " + classBookingId);
+
+                timeShareApi.deleteNotification(classBookingId).enqueue(new Callback() {
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        System.out.println(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        System.out.println(t.getMessage());
+
+                    }
+                });
             }
 
         });
@@ -110,49 +154,57 @@ public class NotificationsFragment extends Fragment {
 
     private void getNotifications() {
 
-        Log.d(TAG, "retrieving notifications");
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                //TODO your background code
+        if (userViewModel.getUser().getValue() != null) {
 
-                if (userViewModel.getUser().getValue() != null) {
+            LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+            loadingDialog.setMessage("Retrieving notifications...");
+            loadingDialog.startLoadingDialog();
 
-                    timeShareApi.getUserNotifications(userViewModel.getUser().getValue().getId()).enqueue(new Callback<List<Notification>>() {
-                        @Override
-                        public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+            timeShareApi.getUserNotifications(userViewModel.getUser().getValue().getId()).enqueue(new Callback<List<Notification>>() {
+                @Override
+                public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
+                    loadingDialog.dismissDialog();
 
-                            if (response.isSuccessful()) {
-                                notifications = response.body();
+                    if (response.isSuccessful()) {
+                        notifications = response.body();
 
 
 //                        int menuItemId = bottomNavigation.getMenu().getItem(3).getItemId();
 //                        BadgeDrawable notificationBadge = bottomNavigation.getOrCreateBadge(menuItemId);
 //                        notificationBadge.setVi
+                        adapter.setNotifications(notifications);
 
-                                adapter.setNotifications(notifications);
-                            }
-                        }
 
-                        @Override
-                        public void onFailure(Call<List<Notification>> call, Throwable t) {
-
-                        }
-                    });
-
-                    try {
-                        Thread.sleep(500);
-                        getNotifications();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
-
-                } else {
                 }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Notification>> call, Throwable t) {
+                    loadingDialog.dismissDialog();
+
+                }
+            });
+
+
+//            try {
+//                Thread.sleep(5000);
+//                getNotifications();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+        }
+
+
+//        AsyncTask.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                //TODO your background code
+//
+//
+//            }
+//        });
 
 
     }

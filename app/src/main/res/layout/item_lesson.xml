@@ -4,23 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="4dp">
+    android:layout_marginBottom="2dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:backgroundTint="#F9F9F9"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="15dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="?borderlessButtonStyle"
-            android:background="@drawable/full_ripple"
-            android:id="@+id/clNotificationBody"
-            >
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_height="180dp"
+
+      >
 
 
             <ImageView
@@ -34,17 +40,14 @@
                 app:srcCompat="@drawable/ic_maths" />
 
             <TextView
-                android:id="@+id/btnViewClass"
+                android:id="@+id/tvHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
-                android:text="View"
-                android:textColor="#0078D7"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="2 Hrs"
+                app:layout_constraintBottom_toBottomOf="@+id/ivUserPhoto"
+                app:layout_constraintStart_toEndOf="@+id/ivUserPhoto" />
 
             <TextView
                 android:id="@+id/tvSubjectTitle"
@@ -57,12 +60,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvNotificationMessage" />
 
             <TextView
+                android:id="@+id/tvTimeCreditPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="53dp"
+                android:text="3.0"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHours"
+                app:layout_constraintStart_toEndOf="@+id/tvHours"
+                app:layout_constraintTop_toTopOf="@+id/tvHours" />
+
+            <TextView
                 android:id="@+id/tvNotificationMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:text="Class confirmed"
+                android:text="Upcoming Lesson"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
@@ -79,6 +93,16 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/default_user_image" />
 
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTimeCreditPrice"
+                app:layout_constraintStart_toEndOf="@+id/tvTimeCreditPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvTimeCreditPrice"
+                app:srcCompat="@drawable/ic_time" />
+
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
@@ -93,14 +117,40 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivUserPhoto" />
 
             <TextView
-                android:id="@+id/tvClassDate"
+                android:id="@+id/tvLessonDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="14dp"
-                android:text="Thursday, Feb 26th"
-                app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
-                app:layout_constraintTop_toBottomOf="@+id/tvSubjectTitle" />
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="16dp"
+                android:text="Thursday 16th Feb"
+                android:textColor="#515151"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLessonStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="0dp"
+                android:text="Status: Not started"
+                app:layout_constraintBottom_toTopOf="@+id/btnJoinLesson"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btnJoinLesson"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/sky_blue"
+                android:text="Join Now"
+                android:visibility="invisible"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

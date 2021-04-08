@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +49,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-        if(viewType == 2){
-        return new NotificationClassBookingViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification_class_booking_request, parent, false));
-        } else  {
+        if (viewType == 2) {
             return new NotificationClassBookingViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification_class_booking_request, parent, false));
+        } else {
+            return new NotificationClassConfirmedViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification_class_confirmation, parent, false));
         }
     }
 
@@ -65,8 +67,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             NotificationClassBooking notificationClassBooking = gson.fromJson(jsonObject, NotificationClassBooking.class);
 
             ((NotificationClassBookingViewHolder) holder).setNotificationData(notificationClassBooking);
+        } else {
+            JsonObject jsonObject = gson.toJsonTree(notifications.get(position).getNotification()).getAsJsonObject();
+            NotificationClassConfirmation notificationClassConfirmation = gson.fromJson(jsonObject, NotificationClassConfirmation.class);
 
-
+            ((NotificationClassConfirmedViewHolder) holder).setNotificationData(notificationClassConfirmation);
         }
     }
 
@@ -134,7 +139,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
 
             btnReject.setOnClickListener(v -> {
-                notificationClickListener.onRejectButtonClicked(getAdapterPosition(),notification.getClassBooking().getId());
+                notificationClickListener.onRejectButtonClicked(getAdapterPosition(), notification.getClassBooking().getId());
 
             });
         }
@@ -151,6 +156,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView ivUserPhoto;
         ImageView ivSubjectImage;
         TextView tvClassDate;
+        ConstraintLayout clNotificationBody;
 
         NotificationClassConfirmedViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -161,6 +167,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ivUserPhoto = itemView.findViewById(R.id.ivUserPhoto);
             ivSubjectImage = itemView.findViewById(R.id.ivSubjectImage);
             tvClassDate = itemView.findViewById(R.id.tvClassDate);
+            clNotificationBody = itemView.findViewById(R.id.clNotificationBody);
 
 
         }
@@ -180,9 +187,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ivSubjectImage.setImageResource(context.getResources().getIdentifier(notification.getSubjectIconName(), "drawable", context.getPackageName()));
             }
 
+            String formattedClassDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(notification.getClassDate());
+            tvClassDate.setText(formattedClassDate);
+
+
             btnViewClass.setOnClickListener(v -> {
-                notificationClickListener.onViewButtonClicked(getAdapterPosition(), notification.getClassId());
+                notificationClickListener.onViewButtonClicked(getAdapterPosition(), notification.getClassBookingId());
             });
+
+            clNotificationBody.setOnClickListener(v -> {
+                notificationClickListener.onViewButtonClicked(getAdapterPosition(), notification.getClassBookingId());
+            });
+
 
         }
 
@@ -192,7 +208,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public interface NotificationClickListener {
 
-        void onAcceptButtonClicked(int position,int classId);
+        void onAcceptButtonClicked(int position, int classId);
 
         void onRejectButtonClicked(int position, int classId);
 

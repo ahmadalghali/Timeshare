@@ -4,22 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
+    android:background="@color/white"
     tools:context=".fragment.account.AccountFragment">
 
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="329dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="471dp"
-        android:text="Account"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
+<!--    <Button-->
+<!--        android:id="@+id/btnMyClass"-->
+<!--        android:layout_width="220dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_marginTop="216dp"-->
+<!--        android:background="@drawable/rounded_white_flat_left"-->
+<!--        android:fontFamily="@font/roboto_bold"-->
+<!--        android:text="Learn"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <Button
+        android:id="@+id/btnMyClass"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="216dp"
+        android:background="@drawable/rounded_white_flat_left"
+        android:backgroundTint="@color/sky_blue"
+        android:fontFamily="@font/roboto_bold"
+        android:text="My Lessons"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/btnMyClass"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="56dp"-->
+<!--        android:layout_marginTop="116dp"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:text="My Learning"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/btnMyClass2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="48dp"-->
+<!--        android:layout_marginTop="52dp"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:text="My Learning"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/sky_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivUserPhoto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/user_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/rbUserRating"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:numStars="5"
+            android:progressTint="@color/Gold"
+            app:layout_constraintEnd_toEndOf="@+id/tvUserName"
+            app:layout_constraintStart_toStartOf="@+id/tvUserName"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="John Doe"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
+            app:layout_constraintTop_toTopOf="@+id/ivUserPhoto" />
+
+        <TextView
+            android:id="@+id/tvRatingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="26"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/rbUserRating"
+            app:layout_constraintStart_toEndOf="@+id/rbUserRating"
+            app:layout_constraintTop_toTopOf="@+id/rbUserRating" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnClassCount"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/button_ripple"
+        android:backgroundTint="@color/Red"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMyClass"
+        app:layout_constraintEnd_toEndOf="@+id/btnMyClass"
+        app:layout_constraintStart_toEndOf="@+id/btnMyClass"
+        app:layout_constraintTop_toTopOf="@+id/btnMyClass"
+        android:visibility="invisible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

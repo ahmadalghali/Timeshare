@@ -155,5 +155,9 @@
     <color name="Black">#000000</color>
     <color name="DarkGrey">#383838</color>
 
+    <color name="text_grey">#E4333333</color>
+    <color name="btn_positive_yellow">#FFC107</color>
+
+
 
 </resources>

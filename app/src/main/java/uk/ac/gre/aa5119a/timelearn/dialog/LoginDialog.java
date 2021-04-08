@@ -102,19 +102,16 @@ public class LoginDialog extends DialogFragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRegisterDialog();
+//                showRegisterDialog();
             }
         });
     }
 
-
-    private void showRegisterDialog(){
-        RegisterDialog registerDialog = new RegisterDialog();
-        registerDialog.setTargetFragment(getTargetFragment(), 1);
-        dismiss();
-        registerDialog.show(getActivity().getSupportFragmentManager(), "RegisterDialog");
-
-    }
+//
+//    private void showRegisterDialog(){
+//        RegisterDialog registerDialog = new RegisterDialog();
+//
+//    }
 
     private void initRetrofit(){
         Retrofit retrofit = new Retrofit.Builder()

@@ -84,7 +84,17 @@
         android:id="@+id/accountFragment"
         android:name="uk.ac.gre.aa5119a.timelearn.fragment.account.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_classroomFragment"
+            app:destination="@id/classroomFragment"
+            app:exitAnim="@anim/from_bottom" />
+        <action
+            android:id="@+id/action_accountFragment_to_myLessonsFragment"
+            app:destination="@id/myLessonsFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="uk.ac.gre.aa5119a.timelearn.fragment.notifications.NotificationsFragment"
@@ -157,6 +167,39 @@
         <action
             android:id="@+id/action_listingDetails_to_learnListingsFragment2"
             app:destination="@id/learnListingsFragment2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/classroomFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.classroom.ClassroomFragment"
+        android:label="fragment_classroom"
+        tools:layout="@layout/fragment_classroom" >
+        <action
+            android:id="@+id/action_classroomFragment_to_rateUserFragment"
+            app:destination="@id/rateUserFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
+    <fragment
+        android:id="@+id/rateUserFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.classroom.RateUserFragment"
+        android:label="fragment_rate_user"
+        tools:layout="@layout/fragment_rate_user" >
+        <action
+            android:id="@+id/action_rateUserFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/myLessonsFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.account.MyLessonsFragment"
+        android:label="fragment_my_lessons"
+        tools:layout="@layout/fragment_my_lessons" >
+        <action
+            android:id="@+id/action_myLessonsFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
     </fragment>

@@ -2,6 +2,7 @@ package uk.ac.gre.aa5119a.timelearn.model.notification;
 
 public class NotificationClassConfirmation {
 
+    private int classBookingId;
     private String subjectTitle;
     private String teacherName;
     private String teacherProfileImageUrl;
@@ -9,7 +10,8 @@ public class NotificationClassConfirmation {
     private long classDate;
     private int classId;
 
-    public NotificationClassConfirmation(String subjectTitle, String teacherName, String teacherProfileImageUrl, String subjectIconName, long classDate, int classId) {
+    public NotificationClassConfirmation(int classBookingId, String subjectTitle, String teacherName, String teacherProfileImageUrl, String subjectIconName, long classDate, int classId) {
+        this.classBookingId = classBookingId;
         this.subjectTitle = subjectTitle;
         this.teacherName = teacherName;
         this.teacherProfileImageUrl = teacherProfileImageUrl;
@@ -64,5 +66,13 @@ public class NotificationClassConfirmation {
 
     public void setClassId(int classId) {
         this.classId = classId;
+    }
+
+    public int getClassBookingId() {
+        return classBookingId;
+    }
+
+    public void setClassBookingId(int classBookingId) {
+        this.classBookingId = classBookingId;
     }
 }

@@ -63,16 +63,33 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
 
         TeacherListing _class = response.getListing();
 
-        if(!response.getUser().getProfileImageUrl().equals(null) && !response.getUser().getProfileImageUrl().equals("") && response.getUser().getProfileImageUrl() != null ){
-            Picasso.get()
-                    .load(response.getUser().getProfileImageUrl())
-                    .placeholder(R.drawable.ic_account)
+//        if(!response.getUser().getProfileImageUrl().equals(null) && !response.getUser().getProfileImageUrl().equals("") && (response.getUser().getProfileImageUrl() != null) ){
+//      boolean userHasPhoto = !response.getUser().getProfileImageUrl().trim().isEmpty() && (response.getUser().getProfileImageUrl() != null);
+//        System.out.println("user image url: " + response.getUser().getProfileImageUrl() + " userHasNoPhoto: " + userHasPhoto);
+//
+//        if(userHasPhoto){
+//            Picasso.get()
+//                    .load(response.getUser().getProfileImageUrl())
+//                    .placeholder(R.drawable.ic_account)
+//                    .into(holder.ivTeacherPhoto);
+//        }else{
+//            holder.ivTeacherPhoto.setImageResource(R.drawable.default_user_image);
+//        }
+//
+        try{
+            boolean userHasPhoto = !response.getUser().getProfileImageUrl().trim().isEmpty() && (response.getUser().getProfileImageUrl() != null);
 
-                    .into(holder.ivTeacherPhoto);
-        }else{
-
+            if(userHasPhoto){
+                Picasso.get()
+                        .load(response.getUser().getProfileImageUrl())
+                        .placeholder(R.drawable.ic_account)
+                        .into(holder.ivTeacherPhoto);
+            }else{
+                holder.ivTeacherPhoto.setImageResource(R.drawable.default_user_image);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
             holder.ivTeacherPhoto.setImageResource(R.drawable.default_user_image);
-
         }
 
 

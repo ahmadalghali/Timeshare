@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sky_blue"
+    tools:context=".fragment.classroom.RateUserFragment">
+
+    <EditText
+        android:id="@+id/etComments"
+        android:layout_width="379dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:maxLines="10"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Comments (Optional)"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbRating" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivTeacherPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+
+        android:layout_marginTop="32dp"
+        android:src="@drawable/user_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHowMuchWouldYouRate" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="John"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/ivTeacherPhoto"
+        app:layout_constraintStart_toStartOf="@+id/ivTeacherPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/ivTeacherPhoto" />
+
+    <TextView
+        android:id="@+id/tvHowMuchWouldYouRate"
+        android:layout_width="344dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="How much would you rate John?"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/rbRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:progressTint="@color/Gold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+    <ImageView
+        android:id="@+id/btnExit"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_cancel"
+        app:tint="@color/white" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_ripple"
+        android:backgroundTint="@color/btn_positive_yellow"
+        android:fontFamily="@font/roboto_bold"
+        android:text="SUBMIT"
+        android:textColor="@color/text_grey"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etComments" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

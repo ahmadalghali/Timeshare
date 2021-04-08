@@ -145,12 +145,17 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 
         listingResponse = academyViewModel.getListingResponse().getValue();
 
-        if (!listingResponse.getUser().getProfileImageUrl().equals(null) && !listingResponse.getUser().getProfileImageUrl().equals("") && listingResponse.getUser().getProfileImageUrl() != null) {
-            Picasso.get()
-                    .load(listingResponse.getUser().getProfileImageUrl())
-                    .placeholder(R.drawable.ic_account)
-                    .into(ivUserPhoto);
-        } else {
+        try {
+            if (listingResponse.getUser().getProfileImageUrl() != null) {
+                Picasso.get()
+                        .load(listingResponse.getUser().getProfileImageUrl())
+                        .placeholder(R.drawable.ic_account)
+                        .into(ivUserPhoto);
+            } else {
+                ivUserPhoto.setImageResource(R.drawable.ic_account);
+            }
+
+        } catch(Exception e){
             ivUserPhoto.setImageResource(R.drawable.ic_account);
         }
 

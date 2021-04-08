@@ -1,16 +1,20 @@
 package uk.ac.gre.aa5119a.timelearn.web;
 
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.gson.JsonObject;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import uk.ac.gre.aa5119a.timelearn.model.LessonDTO;
 import uk.ac.gre.aa5119a.timelearn.model.listing.TeacherListing;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.model.notification.Notification;
@@ -53,4 +57,13 @@ public interface TimeShareApi {
     @PUT("class_booking/{classBookingId}/isAccepted={isAccepted}")
     Call<Boolean> setClassBookingAccepted(@Path("classBookingId") int classBookingId, @Path("isAccepted") boolean isAccepted);
 
+    @DELETE("notifications/{classBookingId}")
+    Call<Void> deleteNotification(@Path("classBookingId") int classBookingId);
+
+    @GET("account/lessonCount")
+    Call<Integer> getUserLessonCount(@Query("userId") int userId);
+
+
+    @GET("lessons/{userId}")
+    Call<List<LessonDTO>> getUserLessons(@Query("userId") int userId);
 }

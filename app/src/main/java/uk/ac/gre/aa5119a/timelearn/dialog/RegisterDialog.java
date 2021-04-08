@@ -1,5 +1,6 @@
 package uk.ac.gre.aa5119a.timelearn.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -33,9 +34,9 @@ import uk.ac.gre.aa5119a.timelearn.web.response.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 
-public class RegisterDialog extends DialogFragment {
-
+public class RegisterDialog {
 
 
     private UserViewModel userViewModel;
@@ -53,22 +54,17 @@ public class RegisterDialog extends DialogFragment {
     private TextView signInButton;
     private Button registerButton;
 
-    private TimeShareApi timeShareApi;
-
-    private static final String BLUE_PRESSED_COLOR = "#006fab";
-
-    private FrameLayout mainActivityFrameLayout;
-
-
+    private Activity activity;
 
     private LoadingDialog loadingDialog;
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    public RegisterDialog(Activity activity, UserViewModel userViewModel) {
 
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        this.activity = activity;
+        this.userViewModel = userViewModel;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
         view = inflater.inflate(R.layout.dialog_register, null);
 
         builder.setView(view);
@@ -80,23 +76,41 @@ public class RegisterDialog extends DialogFragment {
 
         assignGlobalVariables();
         setListeners();
-        initRetrofit();
-
-
-        return registerDialog;
     }
 
-    private void assignGlobalVariables(){
-         etEmail = view.findViewById(R.id.etEmail);
-         etPassword = view.findViewById(R.id.etPassword);
-         etConfirmPassword = view.findViewById(R.id.etConfirmPassword);
-         registerButton = view.findViewById(R.id.registerButton);
-         signInButton = view.findViewById(R.id.signInButton);
-        mainActivityFrameLayout = view.findViewById(R.id.fragment_container);
+//    @NonNull
+//    @Override
+//    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//
+//        LayoutInflater inflater = requireActivity().getLayoutInflater();
+//        view = inflater.inflate(R.layout.dialog_register, null);
+//
+//        builder.setView(view);
+//
+//        registerDialog = builder.create();
+//
+//        registerDialog.setCanceledOnTouchOutside(true);
+//        registerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//        assignGlobalVariables();
+//        setListeners();
+//        initRetrofit();
+//
+//
+//        return registerDialog;
+//    }
+
+    private void assignGlobalVariables() {
+        etEmail = view.findViewById(R.id.etEmail);
+        etPassword = view.findViewById(R.id.etPassword);
+        etConfirmPassword = view.findViewById(R.id.etConfirmPassword);
+        registerButton = view.findViewById(R.id.registerButton);
+        signInButton = view.findViewById(R.id.signInButton);
 
     }
 
-    private void setListeners(){
+    private void setListeners() {
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,33 +123,29 @@ public class RegisterDialog extends DialogFragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonEffect(v, BLUE_PRESSED_COLOR);
-
-
                 registerButtonClicked();
             }
         });
     }
 
 
-    private void showLoginDialog(){
-        LoginDialog loginDialog = new LoginDialog();
-        loginDialog.setTargetFragment(getTargetFragment(), 1);
+    private void showLoginDialog() {
+        LoginDialog2 loginDialog = new LoginDialog2(activity, userViewModel);
         dismiss();
-        loginDialog.show(getActivity().getSupportFragmentManager(), "LoginDialog");
+        loginDialog.show();
     }
 
-    private Boolean areFieldsEmpty(){
+    private Boolean areFieldsEmpty() {
 
         TextInputLayout[] fields = {etEmail, etPassword, etConfirmPassword};
 
         boolean empty = false;
 
-        for(TextInputLayout field : fields){
-            if(field.getEditText().getText().toString().trim().isEmpty()){
+        for (TextInputLayout field : fields) {
+            if (field.getEditText().getText().toString().trim().isEmpty()) {
                 field.setError("Required");
                 empty = true;
-            } else{
+            } else {
                 field.setError(null);
                 empty = false;
             }
@@ -144,13 +154,13 @@ public class RegisterDialog extends DialogFragment {
     }
 
 
-    private void registerButtonClicked(){
+    private void registerButtonClicked() {
 
         etEmail.setError(null);
         etConfirmPassword.setError(null);
         etPassword.setError(null);
 
-        if(areFieldsEmpty()){
+        if (areFieldsEmpty()) {
             return;
         }
 
@@ -159,19 +169,18 @@ public class RegisterDialog extends DialogFragment {
         String password = etPassword.getEditText().getText().toString().trim();
         String confirmPassword = etConfirmPassword.getEditText().getText().toString().trim();
 
-        if(!confirmPassword.equals(password) ){
+        if (!confirmPassword.equals(password)) {
             etConfirmPassword.setError("Password does not match");
             return;
-        }else{
+        } else {
             etConfirmPassword.setError(null);
         }
 
-        loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog = new LoadingDialog(activity);
         loadingDialog.setMessage("Registering...");
         loadingDialog.startLoadingDialog();
 
         Call<RegisterResponse> call = timeShareApi.register(new User(email, password));
-
 
 
         call.enqueue(new Callback<RegisterResponse>() {
@@ -180,29 +189,25 @@ public class RegisterDialog extends DialogFragment {
 
                 loadingDialog.dismissDialog();
 
-                if(!response.isSuccessful()){
-                    Snackbar.make(mainActivityFrameLayout, "Error: " + response.errorBody() + " Code: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
+                if (!response.isSuccessful()) {
+                    Snackbar.make(activity.findViewById(android.R.id.content), "Error: " + response.errorBody() + " Code: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
                     return;
                 }
 
 
                 RegisterResponse registerResponse = response.body();
 
-                if(registerResponse.getMessage().equals("user exists")){
+                if (registerResponse.getMessage().equals("user exists")) {
 
                     etEmail.setError("User exists, sign in.");
 
-                } else if(registerResponse.getMessage().equals("registered")){
+                } else if (registerResponse.getMessage().equals("registered")) {
                     etEmail.setError(null);
 
-//                    show registered toast message
                     showLoginDialog();
-//                    dismiss();
-//                    Toast.makeText(getActivity(), "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
 
 
-                    Snackbar.make(getActivity().findViewById(android.R.id.content), "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
-//                    Toast.makeText(RegisterActivity.this, "Registered successfully, sign in.", Toast.LENGTH_LONG).show();
+                    Snackbar.make(activity.findViewById(android.R.id.content), "Registered successfully, sign in.", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
                 }
 
             }
@@ -211,41 +216,20 @@ public class RegisterDialog extends DialogFragment {
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
                 loadingDialog.dismissDialog();
 
-                Snackbar.make(getActivity().findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
+                Snackbar.make(activity.findViewById(android.R.id.content), t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
             }
         });
 
     }
 
-
-    private void initRetrofit(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://timeshare-backend.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        timeShareApi = retrofit.create(TimeShareApi.class);
+    public void show(){
+        registerDialog.show();
     }
 
-    public static void buttonEffect(View button, String hexColor){
-        button.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(Color.parseColor(hexColor), PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
+    public void dismiss(){
+        registerDialog.dismiss();
     }
+
+
 
 }

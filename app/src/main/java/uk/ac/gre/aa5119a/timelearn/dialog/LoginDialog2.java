@@ -42,7 +42,6 @@ public class LoginDialog2{
 
     private View view;
 
-    private static final String BLUE_PRESSED_COLOR = "#006fab";
     private Activity activity;
 
     public LoginDialog2(Activity activity, UserViewModel userViewModel){
@@ -78,7 +77,7 @@ public class LoginDialog2{
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonEffect(v,BLUE_PRESSED_COLOR);
+//                buttonEffect(v,BLUE_PRESSED_COLOR);
                 signInButtonClicked();
             }
         });
@@ -86,19 +85,17 @@ public class LoginDialog2{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showRegisterDialog();
+                showRegisterDialog();
             }
         });
     }
 
 
-//    private void showRegisterDialog(){
-//        RegisterDialog registerDialog = new RegisterDialog();
-//        registerDialog.setTargetFragment(getTargetFragment(), 1);
-//        dismiss();
-//        registerDialog.show(getActivity().getSupportFragmentManager(), "RegisterDialog");
-//
-//    }
+    private void showRegisterDialog(){
+        RegisterDialog registerDialog = new RegisterDialog(activity, userViewModel);
+        dismiss();
+        registerDialog.show();
+    }
 
 
 
@@ -194,26 +191,6 @@ public class LoginDialog2{
 
     }
 
-    public static void buttonEffect(View button, String hexColor){
-        button.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(Color.parseColor(hexColor), PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
-    }
 
     public void show(){
         loginDialog.show();
