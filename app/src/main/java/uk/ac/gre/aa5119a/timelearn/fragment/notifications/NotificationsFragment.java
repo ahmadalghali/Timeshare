@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,12 +40,14 @@ import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.adapter.NotificationAdapter;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoadingDialog;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog2;
+import uk.ac.gre.aa5119a.timelearn.fragment.academy.ListingDetailsDirections;
 import uk.ac.gre.aa5119a.timelearn.model.learn.ClassBooking;
 import uk.ac.gre.aa5119a.timelearn.model.notification.Notification;
 import uk.ac.gre.aa5119a.timelearn.model.notification.NotificationClassBooking;
 import uk.ac.gre.aa5119a.timelearn.utils.LoadingCircle;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.userViewModel;
 
@@ -57,10 +61,9 @@ public class NotificationsFragment extends Fragment {
     View view;
 
     NotificationAdapter adapter;
+    LoadingDialog loadingDialog;
 
-
-
-
+//    LoadingCircle loadingCircle = new LoadingCircle(getActivity());
 
 
     @Nullable
@@ -94,33 +97,46 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onAcceptButtonClicked(int position, int classBookingId) {
 //                Toast.makeText(getContext(), "Notification " + position + " Accepted", Toast.LENGTH_SHORT).show();
-                timeShareApi.setClassBookingAccepted(classBookingId, true).enqueue(new Callback<Boolean>() {
+                timeShareApi.setClassBookingAccepted(classBookingId, true).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        getNotifications();
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        System.out.println("response: " + response);
+                        System.out.println("issuccessful: " + response.isSuccessful());
+                        System.out.println("message: " + response.message());
+                        System.out.println("body: " + response.body());
+                        if (response.isSuccessful()) {
+                            getNotifications();
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
 
                     }
                 });
-                getNotifications();
+//                getNotifications();
             }
 
             @Override
             public void onRejectButtonClicked(int position, int classBookingId) {
 
-                timeShareApi.setClassBookingAccepted(classBookingId, false).enqueue(new Callback<Boolean>() {
+
+                loadingDialog.startLoadingDialog();
+
+
+                timeShareApi.setClassBookingAccepted(classBookingId, false).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        loadingDialog.dismissDialog();
+
                         getNotifications();
 
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        getNotifications();
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        loadingDialog.dismissDialog();
 
                     }
                 });
@@ -135,7 +151,11 @@ public class NotificationsFragment extends Fragment {
                 timeShareApi.deleteNotification(classBookingId).enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {
-                        System.out.println(response);
+                        if (response.isSuccessful()) {
+                            NavController navController = navHostFragment.getNavController();
+                            NavDirections action = NotificationsFragmentDirections.actionNotificationsFragmentToMyLessonsFragment();
+                            navController.navigate(action);
+                        }
                     }
 
                     @Override
@@ -149,6 +169,9 @@ public class NotificationsFragment extends Fragment {
         });
 
         rvNotifications.setAdapter(adapter);
+
+         loadingDialog = new LoadingDialog(getActivity(), true);
+
     }
 
 
@@ -157,15 +180,14 @@ public class NotificationsFragment extends Fragment {
 
         if (userViewModel.getUser().getValue() != null) {
 
-            LoadingDialog loadingDialog = new LoadingDialog(getActivity());
             loadingDialog.setMessage("Retrieving notifications...");
             loadingDialog.startLoadingDialog();
+
 
             timeShareApi.getUserNotifications(userViewModel.getUser().getValue().getId()).enqueue(new Callback<List<Notification>>() {
                 @Override
                 public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {
                     loadingDialog.dismissDialog();
-
                     if (response.isSuccessful()) {
                         notifications = response.body();
 
@@ -183,28 +205,12 @@ public class NotificationsFragment extends Fragment {
                 public void onFailure(Call<List<Notification>> call, Throwable t) {
                     loadingDialog.dismissDialog();
 
+
                 }
             });
 
 
-//            try {
-//                Thread.sleep(5000);
-//                getNotifications();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-
         }
-
-
-//        AsyncTask.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                //TODO your background code
-//
-//
-//            }
-//        });
 
 
     }

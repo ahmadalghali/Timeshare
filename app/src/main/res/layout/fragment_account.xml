@@ -22,6 +22,41 @@
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
+        android:id="@+id/btnTeachingClassCount"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/button_ripple"
+        android:backgroundTint="@color/Red"
+        android:text="5"
+        android:translationZ="90dp"
+        tools:visibility="visible"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMyTeaching"
+        app:layout_constraintEnd_toEndOf="@+id/btnMyTeaching"
+        app:layout_constraintStart_toEndOf="@+id/btnMyTeaching"
+        app:layout_constraintTop_toTopOf="@+id/btnMyTeaching" />
+
+    <Button
+        android:id="@+id/btnMyTeaching"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_white_flat_left"
+        android:backgroundTint="@color/sky_blue"
+        android:fontFamily="@font/roboto_bold"
+        android:text="My Teaching"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMyClass" />
+
+    <Button
         android:id="@+id/btnMyClass"
         android:layout_width="220dp"
         android:layout_height="55dp"
@@ -29,7 +64,7 @@
         android:background="@drawable/rounded_white_flat_left"
         android:backgroundTint="@color/sky_blue"
         android:fontFamily="@font/roboto_bold"
-        android:text="My Lessons"
+        android:text="My Learning"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -132,6 +167,7 @@
         android:layout_marginBottom="45dp"
         android:background="@drawable/button_ripple"
         android:backgroundTint="@color/Red"
+        tools:visibility="visible"
         android:text="5"
         android:textColor="@color/white"
         android:textSize="20sp"

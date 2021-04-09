@@ -2,46 +2,29 @@ package uk.ac.gre.aa5119a.timelearn.adapter;
 
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.internal.LinkedTreeMap;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.LessonDTO;
-import uk.ac.gre.aa5119a.timelearn.model.notification.Notification;
-import uk.ac.gre.aa5119a.timelearn.model.notification.NotificationClassBooking;
-import uk.ac.gre.aa5119a.timelearn.model.notification.NotificationClassConfirmation;
 
-public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     List<LessonDTO> lessons = new ArrayList<>();
@@ -49,7 +32,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     LessonClickListener lessonClickListener;
 
-    public MyLessonsAdapter(Context context, LessonClickListener lessonClickListener) {
+    public MyTeachingAdapter(Context context, LessonClickListener lessonClickListener) {
         this.context = context;
         this.lessonClickListener = lessonClickListener;
 
@@ -59,7 +42,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NotNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new LessonViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lesson, parent, false));
+        return new LessonViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_class, parent, false));
     }
 
     @Override
@@ -86,7 +69,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView tvHours;
         TextView tvTimeCreditPrice;
         TextView tvUserName;
-        TextView btnJoinLesson;
+        TextView btnStartClass;
         ImageView ivUserPhoto;
         ImageView ivSubjectImage;
         TextView tvLessonStatus;
@@ -99,7 +82,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tvHours = itemView.findViewById(R.id.tvHours);
             tvTimeCreditPrice = itemView.findViewById(R.id.tvTimeCreditPrice);
             tvUserName = itemView.findViewById(R.id.tvUserName);
-            btnJoinLesson = itemView.findViewById(R.id.btnJoinLesson);
+            btnStartClass = itemView.findViewById(R.id.btnStartClass);
             ivUserPhoto = itemView.findViewById(R.id.ivUserPhoto);
             ivSubjectImage = itemView.findViewById(R.id.ivSubjectImage);
             tvLessonStatus = itemView.findViewById(R.id.tvLessonStatus);
@@ -109,16 +92,16 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         void setLessonData(LessonDTO lesson) {
 
-            tvNotificationMessage.setText("Upcoming Lesson");
+//            tvNotificationMessage.setText("Upcoming Lesson");
             tvSubjectTitle.setText(lesson.getSubjectTitle());
             tvHours.setText(lesson.getHours() + " Hrs");
             tvTimeCreditPrice.setText("" + lesson.getLessonPrice());
-            tvUserName.setText("Teacher: " + lesson.getTeacherFirstName());
+            tvUserName.setText("Student: "  +  lesson.getStudentFirstName());
 
 
             try {
                 Picasso.get()
-                        .load(lesson.getTeacherImage())
+                        .load(lesson.getStudentImage())
                         .error(R.drawable.default_user_image)
                         .into(ivUserPhoto);
             } catch (Exception e) {
@@ -151,13 +134,13 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Date today = new Date(System.currentTimeMillis());
 
             if (!today.before(lesson.getLessonDate())) {
-                btnJoinLesson.setVisibility(View.VISIBLE);
+                btnStartClass.setVisibility(View.VISIBLE);
             } else {
-                btnJoinLesson.setVisibility(View.INVISIBLE);
+                btnStartClass.setVisibility(View.INVISIBLE);
             }
 
-            btnJoinLesson.setOnClickListener(v -> {
-                lessonClickListener.onJoinButtonClicked(getAdapterPosition(), lesson.getId());
+            btnStartClass.setOnClickListener(v -> {
+                lessonClickListener.onStartClassButtonClicked(getAdapterPosition(), lesson.getId());
             });
 
 
@@ -169,7 +152,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public interface LessonClickListener {
 
-        void onJoinButtonClicked(int position, int lessonId);
+        void onStartClassButtonClicked(int position, int lessonId);
     }
 
 

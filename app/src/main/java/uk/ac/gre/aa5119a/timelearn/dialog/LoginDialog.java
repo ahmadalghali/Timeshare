@@ -146,7 +146,7 @@ public class LoginDialog extends DialogFragment {
     }
 
     private void signInButtonClicked(){
-        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity(), false);
         loadingDialog.setMessage("Logging in...");
         loadingDialog.startLoadingDialog();
 

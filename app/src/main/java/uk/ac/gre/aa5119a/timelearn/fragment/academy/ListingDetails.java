@@ -111,7 +111,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
         return view;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
+//    @RequiresApi(api = Build.VERSION_CODES.Q)
     private void assignGlobalVariables() throws IOException {
 
         backBtn = view.findViewById(R.id.backBtn);
@@ -176,7 +176,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
         tvCity.setText(listingResponse.getUser().getCity());
 
 
-        npHours.setTextSize(40);
+//        npHours.setTextSize(40);
         npHours.setMinValue(1);
         npHours.setMaxValue(6);
 

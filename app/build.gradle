@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "uk.ac.gre.aa5119a.timelearn"
-        minSdkVersion 28
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"

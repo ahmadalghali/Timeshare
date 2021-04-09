@@ -194,7 +194,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
                 if (uploadtask != null && uploadtask.isInProgress()) {
                     Toast.makeText(getContext(), "Please wait...", Toast.LENGTH_SHORT).show();
                 } else {
-                    loadingDialog = new LoadingDialog(getActivity());
+                    loadingDialog = new LoadingDialog(getActivity(), false);
                     loadingDialog.startLoadingDialog();
 
 

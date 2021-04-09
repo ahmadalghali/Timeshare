@@ -121,7 +121,7 @@ public class LoginDialog2{
     }
 
     private void signInButtonClicked(){
-        LoadingDialog loadingDialog = new LoadingDialog(activity);
+        LoadingDialog loadingDialog = new LoadingDialog(activity, false);
         loadingDialog.setMessage("Logging in...");
         loadingDialog.startLoadingDialog();
 

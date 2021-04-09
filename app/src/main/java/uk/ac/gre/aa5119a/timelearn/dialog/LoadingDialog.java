@@ -20,7 +20,7 @@ public class LoadingDialog {
     public AlertDialog dialog;
     private TextView tvMessage;
 
-    public LoadingDialog(Activity activity) {
+    public LoadingDialog(Activity activity, boolean isCancelable) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -32,7 +32,7 @@ public class LoadingDialog {
 
         tvMessage = view.findViewById(R.id.tvLoadingMessage);
 
-        builder.setCancelable(false);
+        builder.setCancelable(isCancelable);
 
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

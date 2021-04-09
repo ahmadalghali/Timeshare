@@ -1,6 +1,10 @@
 package uk.ac.gre.aa5119a.timelearn.model;
 
 
+
+
+import java.util.Date;
+
 import uk.ac.gre.aa5119a.timelearn.model.listing.Subject;
 
 public class LessonDTO {
@@ -12,7 +16,7 @@ public class LessonDTO {
     private String teacherFirstName;
     private int hours;
     private double lessonPrice;
-    private long lessonDate;
+    private Date lessonDate;
     private boolean isAttended;
 
     private String studentImage;
@@ -22,7 +26,7 @@ public class LessonDTO {
     private String subjectTitle;
     private String subjectIconUrl;
 
-    private String Status;
+    private String status;
 
 
     public int getId() {
@@ -57,11 +61,12 @@ public class LessonDTO {
         this.hours = hours;
     }
 
-    public long getLessonDate() {
+
+    public Date getLessonDate() {
         return lessonDate;
     }
 
-    public void setLessonDate(long lessonDate) {
+    public void setLessonDate(Date lessonDate) {
         this.lessonDate = lessonDate;
     }
 
@@ -138,11 +143,12 @@ public class LessonDTO {
         this.subjectIconUrl = subjectIconUrl;
     }
 
+
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 }

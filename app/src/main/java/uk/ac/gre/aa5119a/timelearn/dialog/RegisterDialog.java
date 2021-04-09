@@ -176,7 +176,7 @@ public class RegisterDialog {
             etConfirmPassword.setError(null);
         }
 
-        loadingDialog = new LoadingDialog(activity);
+        loadingDialog = new LoadingDialog(activity, false);
         loadingDialog.setMessage("Registering...");
         loadingDialog.startLoadingDialog();
 

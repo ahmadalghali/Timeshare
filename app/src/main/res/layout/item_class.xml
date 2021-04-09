@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:text="Upcoming Lesson"
+                android:text="Upcoming Class"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
@@ -106,8 +106,8 @@
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="John"
+                android:layout_marginTop="3dp"
+                android:text="Student: John"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/ivUserPhoto"
@@ -133,19 +133,19 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
                 android:text="Status: Not started"
-                app:layout_constraintBottom_toTopOf="@+id/btnJoinLesson"
+                app:layout_constraintBottom_toTopOf="@+id/btnStartClass"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:id="@+id/btnJoinLesson"
+                android:id="@+id/btnStartClass"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/sky_blue"
-                android:text="Join Now"
-                android:visibility="invisible"
+                android:text="Start Class"
                 android:textColor="#FFFFFF"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

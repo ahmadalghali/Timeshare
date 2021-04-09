@@ -35,10 +35,14 @@ public class AccountFragment extends Fragment {
 
 
     TextView btnMyClass;
+    TextView btnMyTeaching;
+
+    Button btnClassCount;
+    Button btnTeachingClassCount;
+
     CircleImageView ivUserPhoto;
     private UserViewModel userViewModel;
 
-    Button btnClassCount;
 
     TextView tvUserName;
     TextView tvRatingCount;
@@ -100,6 +104,29 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        timeShareApi.getUserTeachingLessonCount(user.getId()).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()) {
+                    int classCount = response.body();
+                    if (classCount == 0) {
+                        btnTeachingClassCount.setVisibility(View.INVISIBLE);
+                    } else {
+                        btnTeachingClassCount.setVisibility(View.VISIBLE);
+                        btnTeachingClassCount.setText("" + classCount);
+                    }
+                } else {
+                    System.out.println("could not get teacher class count  " + response);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                btnTeachingClassCount.setVisibility(View.INVISIBLE);
+
+            }
+        });
 
     }
 
@@ -109,13 +136,27 @@ public class AccountFragment extends Fragment {
             NavDirections action = AccountFragmentDirections.actionAccountFragmentToMyLessonsFragment();
             navController.navigate(action);
         });
+
+        btnMyTeaching.setOnClickListener(v -> {
+            NavController navController = navHostFragment.getNavController();
+            NavDirections action = AccountFragmentDirections.actionAccountFragmentToMyTeachingFragment();
+            navController.navigate(action);
+        });
+
+
     }
 
     private void assignGlobalVariables() {
         btnMyClass = view.findViewById(R.id.btnMyClass);
+        btnMyTeaching = view.findViewById(R.id.btnMyTeaching);
+
         ivUserPhoto = view.findViewById(R.id.ivUserPhoto);
         tvUserName = view.findViewById(R.id.tvUserName);
+
         btnClassCount = view.findViewById(R.id.btnClassCount);
+        btnTeachingClassCount = view.findViewById(R.id.btnTeachingClassCount);
+
+
         tvRatingCount = view.findViewById(R.id.tvRatingCount);
         rbUserRating = view.findViewById(R.id.rbUserRating);
 

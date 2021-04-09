@@ -17,29 +17,26 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.adapter.MyLessonsAdapter;
+import uk.ac.gre.aa5119a.timelearn.adapter.MyTeachingAdapter;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoadingDialog;
 import uk.ac.gre.aa5119a.timelearn.model.LessonDTO;
-import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.LessonViewModel;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
-
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.userViewModel;
 
 
-public class MyLessonsFragment extends Fragment {
+public class MyTeachingFragment extends Fragment {
 
 
     List<LessonDTO> lessons = new ArrayList<>();
@@ -47,7 +44,7 @@ public class MyLessonsFragment extends Fragment {
     View view;
     ImageView backBtn;
 
-    MyLessonsAdapter adapter;
+    MyTeachingAdapter adapter;
 
     LessonViewModel lessonViewModel;
 
@@ -55,10 +52,10 @@ public class MyLessonsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_my_lessons, container, false);
+        view = inflater.inflate(R.layout.fragment_my_teaching, container, false);
 
         assignGlobalVariables();
-        getUserLessons();
+        getUserTeachingLessons();
 
         return view;
     }
@@ -74,9 +71,9 @@ public class MyLessonsFragment extends Fragment {
 
         rvLessons.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new MyLessonsAdapter(getContext(), new MyLessonsAdapter.LessonClickListener() {
+        adapter = new MyTeachingAdapter(getContext(), new MyTeachingAdapter.LessonClickListener() {
             @Override
-            public void onJoinButtonClicked(int position, int lessonId) {
+            public void onStartClassButtonClicked(int position, int lessonId) {
                 showConfirmDialog(lessonId);
             }
         });
@@ -84,20 +81,20 @@ public class MyLessonsFragment extends Fragment {
 
         backBtn.setOnClickListener(v ->  {
             NavController navController = navHostFragment.getNavController();
-            NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToAccountFragment();
+            NavDirections action = MyTeachingFragmentDirections.actionMyTeachingFragmentToAccountFragment();
             navController.navigate(action);
         });
     }
 
     private void showConfirmDialog(int lessonId) {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        alertDialog.setTitle("Join Lesson");
-        alertDialog.setMessage("Are you ready to join this lesson?");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Join",
+        alertDialog.setTitle("Start Class");
+        alertDialog.setMessage("Are you ready to start this class?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Start",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        joinLesson(lessonId);
+                        startClass(lessonId);
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
@@ -109,25 +106,25 @@ public class MyLessonsFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void joinLesson(int lessonId) {
+    private void startClass(int lessonId) {
         lessonViewModel.setLessonId(lessonId);
 
         NavController navController = navHostFragment.getNavController();
-        NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToClassroomFragment();
+        NavDirections action = MyTeachingFragmentDirections.actionMyTeachingFragmentToClassroomFragment();
         navController.navigate(action);
     }
 
 
-    private void getUserLessons() {
+    private void getUserTeachingLessons() {
 
 
         if (userViewModel.getUser().getValue() != null) {
 
             LoadingDialog loadingDialog = new LoadingDialog(getActivity(), true);
-            loadingDialog.setMessage("Retrieving Lessons...");
+            loadingDialog.setMessage("Loading classes...");
             loadingDialog.startLoadingDialog();
 
-            timeShareApi.getUserLessons(userViewModel.getUser().getValue().getId()).enqueue(new Callback<List<LessonDTO>>() {
+            timeShareApi.getUserTeachingLessons(userViewModel.getUser().getValue().getId()).enqueue(new Callback<List<LessonDTO>>() {
                 @Override
                 public void onResponse(Call<List<LessonDTO>> call, Response<List<LessonDTO>> response) {
                     loadingDialog.dismissDialog();

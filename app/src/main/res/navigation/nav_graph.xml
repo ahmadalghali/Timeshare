@@ -86,12 +86,13 @@
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
-            android:id="@+id/action_accountFragment_to_classroomFragment"
-            app:destination="@id/classroomFragment"
-            app:exitAnim="@anim/from_bottom" />
-        <action
             android:id="@+id/action_accountFragment_to_myLessonsFragment"
             app:destination="@id/myLessonsFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+        <action
+            android:id="@+id/action_accountFragment_to_myTeachingFragment"
+            app:destination="@id/myTeachingFragment"
             app:enterAnim="@anim/from_right2"
             app:exitAnim="@anim/to_left2" />
     </fragment>
@@ -99,7 +100,13 @@
         android:id="@+id/notificationsFragment"
         android:name="uk.ac.gre.aa5119a.timelearn.fragment.notifications.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_myLessonsFragment"
+            app:destination="@id/myLessonsFragment"
+            app:enterAnim="@anim/from_right2"
+            app:exitAnim="@anim/to_left2" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="uk.ac.gre.aa5119a.timelearn.fragment.search.SearchFragment"
@@ -202,5 +209,24 @@
             app:destination="@id/accountFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_myLessonsFragment_to_classroomFragment"
+            app:destination="@id/classroomFragment"
+            app:enterAnim="@anim/from_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/myTeachingFragment"
+        android:name="uk.ac.gre.aa5119a.timelearn.fragment.account.MyTeachingFragment"
+        android:label="fragment_my_teaching"
+        tools:layout="@layout/fragment_my_teaching" >
+        <action
+            android:id="@+id/action_myTeachingFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_myTeachingFragment_to_classroomFragment"
+            app:destination="@id/classroomFragment"
+            app:enterAnim="@anim/from_bottom" />
     </fragment>
 </navigation>

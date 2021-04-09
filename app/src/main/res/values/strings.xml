@@ -2,4 +2,9 @@
     <string name="app_name">timelearn</string>
     <string name="registerMessage">Don\'t have an account? <b>Register</b></string>
     <string name="signInMessage">Already have an account? <b>Sign in</b></string>
+
+
+
+
+
 </resources>

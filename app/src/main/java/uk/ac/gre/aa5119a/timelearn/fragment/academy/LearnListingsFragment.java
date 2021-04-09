@@ -149,7 +149,7 @@ public class LearnListingsFragment extends Fragment {
     private void getClassesBySubject(int subjectId){
 
         Call<List<TeacherListingResponse>> call =  timeShareApi.getClassesBySubject(subjectId);
-        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity(), true);
         loadingDialog.setMessage("Loading classes...");
         loadingDialog.startLoadingDialog();
 

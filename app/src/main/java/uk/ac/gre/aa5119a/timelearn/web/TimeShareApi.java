@@ -1,6 +1,8 @@
 package uk.ac.gre.aa5119a.timelearn.web;
 
 
+import androidx.lifecycle.LiveData;
+
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.gson.JsonObject;
 
@@ -55,7 +57,7 @@ public interface TimeShareApi {
     Call<Boolean> isClassRequestedByUser(@Path("classId") int classId, @Path("studentId") int studentId);
 
     @PUT("class_booking/{classBookingId}/isAccepted={isAccepted}")
-    Call<Boolean> setClassBookingAccepted(@Path("classBookingId") int classBookingId, @Path("isAccepted") boolean isAccepted);
+    Call<Void> setClassBookingAccepted(@Path("classBookingId") int classBookingId, @Path("isAccepted") boolean isAccepted);
 
     @DELETE("notifications/{classBookingId}")
     Call<Void> deleteNotification(@Path("classBookingId") int classBookingId);
@@ -63,7 +65,16 @@ public interface TimeShareApi {
     @GET("account/lessonCount")
     Call<Integer> getUserLessonCount(@Query("userId") int userId);
 
+    @GET("account/teachingLessonCount")
+    Call<Integer> getUserTeachingLessonCount(@Query("userId") int userId);
 
     @GET("lessons/{userId}")
-    Call<List<LessonDTO>> getUserLessons(@Query("userId") int userId);
+    Call<List<LessonDTO>> getUserLessons(@Path("userId") int userId);
+
+    @GET("lessons/teach/{userId}")
+    Call<List<LessonDTO>> getUserTeachingLessons(@Path("userId") int userId);
+
+
+    @GET("lesson/{lessonId}")
+    Call<LessonDTO> getLesson(@Path("lessonId")int lessonId);
 }
