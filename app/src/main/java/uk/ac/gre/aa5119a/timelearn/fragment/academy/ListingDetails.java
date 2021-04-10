@@ -47,6 +47,7 @@ import retrofit2.Response;
 import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.dialog.LoginDialog2;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentDirections;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.AcademyViewModel;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.request.ClassBookingRequest;
@@ -215,7 +216,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
                 btnBookClass.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
             }
         } else {
-            promptSignIn();
+//            promptSignIn();
         }
 
 
@@ -406,7 +407,8 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
         snackbar.setAction("SIGN IN", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel);
+
+                LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel,null);
                 loginDialog.show();
             }
         });

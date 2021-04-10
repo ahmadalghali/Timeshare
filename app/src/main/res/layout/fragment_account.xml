@@ -21,46 +21,45 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/btnTeachingClassCount"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="45dp"
-        android:background="@drawable/button_ripple"
-        android:backgroundTint="@color/Red"
-        android:text="5"
-        android:translationZ="90dp"
-        tools:visibility="visible"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/btnMyTeaching"
-        app:layout_constraintEnd_toEndOf="@+id/btnMyTeaching"
-        app:layout_constraintStart_toEndOf="@+id/btnMyTeaching"
-        app:layout_constraintTop_toTopOf="@+id/btnMyTeaching" />
 
     <Button
         android:id="@+id/btnMyTeaching"
         android:layout_width="220dp"
         android:layout_height="55dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/rounded_white_flat_left"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_white_flat_right"
         android:backgroundTint="@color/sky_blue"
         android:fontFamily="@font/roboto_bold"
         android:text="My Teaching"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMyClass" />
+
+    <Button
+        android:id="@+id/btnTeachingClassCount"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/button_ripple"
+        android:backgroundTint="@color/Red"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMyTeaching"
+        app:layout_constraintEnd_toStartOf="@+id/btnMyTeaching"
+        app:layout_constraintStart_toStartOf="@+id/btnMyTeaching"
+        app:layout_constraintTop_toTopOf="@+id/btnMyTeaching"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnMyClass"
         android:layout_width="220dp"
         android:layout_height="55dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/rounded_white_flat_left"
         android:backgroundTint="@color/sky_blue"
         android:fontFamily="@font/roboto_bold"
@@ -69,44 +68,55 @@
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/btnMyClass"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="56dp"-->
-<!--        android:layout_marginTop="116dp"-->
-<!--        android:fontFamily="@font/roboto_medium"-->
-<!--        android:text="My Learning"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="24sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/btnMyClass2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="48dp"-->
-<!--        android:layout_marginTop="52dp"-->
-<!--        android:fontFamily="@font/roboto_medium"-->
-<!--        android:text="My Learning"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="24sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />-->
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         android:background="@color/sky_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:id="@+id/timeCredits3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Available balance: "
+            android:textColor="#F1F1F1"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivUserPhoto" />
+
+        <TextView
+            android:id="@+id/tvTimeCredits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="27"
+            android:textColor="#F1F1F1"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeCredits3"
+            app:layout_constraintStart_toEndOf="@+id/timeCredits3"
+            app:layout_constraintTop_toTopOf="@+id/timeCredits3" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeCredits"
+            app:layout_constraintStart_toEndOf="@+id/tvTimeCredits"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeCredits"
+            app:srcCompat="@drawable/ic_time"
+            app:tint="@color/white" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivUserPhoto"
@@ -124,12 +134,11 @@
             style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:numStars="5"
             android:progressTint="@color/Gold"
-            app:layout_constraintEnd_toEndOf="@+id/tvUserName"
-            app:layout_constraintStart_toStartOf="@+id/tvUserName"
+            app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
             app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
         <TextView

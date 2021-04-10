@@ -37,8 +37,11 @@ public class AccountFragment extends Fragment {
     TextView btnMyClass;
     TextView btnMyTeaching;
 
+    TextView tvTimeCredits;
+
     Button btnClassCount;
     Button btnTeachingClassCount;
+
 
     CircleImageView ivUserPhoto;
     private UserViewModel userViewModel;
@@ -84,6 +87,8 @@ public class AccountFragment extends Fragment {
 
         rbUserRating.isIndicator();
         rbUserRating.setRating((float) user.getRatingScore());
+
+        tvTimeCredits.setText("" + (float) user.getTimeCreditsCount());
 
         timeShareApi.getUserLessonCount(user.getId()).enqueue(new Callback<Integer>() {
             @Override
@@ -159,6 +164,8 @@ public class AccountFragment extends Fragment {
 
         tvRatingCount = view.findViewById(R.id.tvRatingCount);
         rbUserRating = view.findViewById(R.id.rbUserRating);
+
+        tvTimeCredits = view.findViewById(R.id.tvTimeCredits);
 
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 

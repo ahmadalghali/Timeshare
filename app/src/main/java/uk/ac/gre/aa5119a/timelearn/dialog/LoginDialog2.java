@@ -1,6 +1,8 @@
 package uk.ac.gre.aa5119a.timelearn.dialog;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,14 +23,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uk.ac.gre.aa5119a.timelearn.R;
+import uk.ac.gre.aa5119a.timelearn.fragment.account.AccountFragmentDirections;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentDirections;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.LoginResponse;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 
-public class LoginDialog2{
+public class LoginDialog2 {
 
     private TextInputLayout etEmail;
     private TextInputLayout etPassword;
@@ -38,16 +43,19 @@ public class LoginDialog2{
 
     private UserViewModel userViewModel;
 
-    private  Dialog loginDialog;
+    private Dialog loginDialog;
 
     private View view;
 
     private Activity activity;
 
-    public LoginDialog2(Activity activity, UserViewModel userViewModel){
+    private NavDirections destination;
+
+    public LoginDialog2(Activity activity, UserViewModel userViewModel, NavDirections destination) {
 
         this.activity = activity;
         this.userViewModel = userViewModel;
+        this.destination = destination;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -65,14 +73,14 @@ public class LoginDialog2{
     }
 
 
-    private void assignGlobalVariables(){
+    private void assignGlobalVariables() {
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etPassword);
         signInButton = view.findViewById(R.id.signInButton);
         registerButton = view.findViewById(R.id.registerButton);
     }
 
-    private void initListeners(){
+    private void initListeners() {
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,28 +99,26 @@ public class LoginDialog2{
     }
 
 
-    private void showRegisterDialog(){
+    private void showRegisterDialog() {
         RegisterDialog registerDialog = new RegisterDialog(activity, userViewModel);
         dismiss();
         registerDialog.show();
     }
 
 
-
-
-    private Boolean areFieldsEmpty(){
+    private Boolean areFieldsEmpty() {
 
         TextInputLayout[] fields = {etEmail, etPassword};
 
         boolean empty = false;
 
-        for(TextInputLayout field : fields){
+        for (TextInputLayout field : fields) {
             String input = field.getEditText().getText().toString().trim();
 
-            if(input.isEmpty()){
+            if (input.isEmpty()) {
                 field.setError("Required");
                 empty = true;
-            } else{
+            } else {
                 field.setError(null);
                 empty = false;
             }
@@ -120,12 +126,12 @@ public class LoginDialog2{
         return empty;
     }
 
-    private void signInButtonClicked(){
+    private void signInButtonClicked() {
         LoadingDialog loadingDialog = new LoadingDialog(activity, false);
         loadingDialog.setMessage("Logging in...");
         loadingDialog.startLoadingDialog();
 
-        if(areFieldsEmpty()){
+        if (areFieldsEmpty()) {
             loadingDialog.dismissDialog();
             return;
         }
@@ -136,13 +142,12 @@ public class LoginDialog2{
         Call<LoginResponse> call = timeShareApi.login(new User(email, password));
 
 
-
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 loadingDialog.dismissDialog();
 
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Snackbar.make(activity.findViewById(android.R.id.content), "Error: " + response.code(), BaseTransientBottomBar.LENGTH_LONG).show();
                     loadingDialog.dismissDialog();
                     return;
@@ -151,7 +156,7 @@ public class LoginDialog2{
 
                 LoginResponse loginResponse = response.body();
 
-                if(loginResponse.getMessage().equals("logged in")){
+                if (loginResponse.getMessage().equals("logged in")) {
 
 
                     userViewModel.setUser(loginResponse.getUser());
@@ -159,22 +164,28 @@ public class LoginDialog2{
                     dismiss();
 
 
-
                     bottomNavigation.getMenu().clear();
                     bottomNavigation.inflateMenu(R.menu.bottom_navigation_logged_in);
 
+                    if (destination != null) {
+                        NavController navController = navHostFragment.getNavController();
+
+                        navController.navigate(destination);
+                    }
+
                     dismiss();
+
 
                     Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "Welcome " + loginResponse.getUser().getEmail(), BaseTransientBottomBar.LENGTH_LONG);
                     snackbar.setAnchorView(bottomNavigation);
                     snackbar.show();
 
 
-                } else if(loginResponse.getMessage().equals("incorrect password")){
+                } else if (loginResponse.getMessage().equals("incorrect password")) {
 
                     etPassword.setError("Incorrect password");
 
-                } else if(loginResponse.getMessage().equals("user does not exist")){
+                } else if (loginResponse.getMessage().equals("user does not exist")) {
 
                     etEmail.setError("User not found, register.");
                 }
@@ -184,7 +195,7 @@ public class LoginDialog2{
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 loadingDialog.dismissDialog();
 
-                Snackbar.make(activity.findViewById(android.R.id.content),t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(activity.findViewById(android.R.id.content), t.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
 //                showSnackBar(t.getMessage());
             }
         });
@@ -192,11 +203,13 @@ public class LoginDialog2{
     }
 
 
-    public void show(){
+    public void show() {
+
+
         loginDialog.show();
     }
 
-    public void dismiss(){
+    public void dismiss() {
         loginDialog.dismiss();
     }
 

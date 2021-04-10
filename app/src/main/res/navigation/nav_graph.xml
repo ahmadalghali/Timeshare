@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginDialog"
             app:destination="@id/loginDialog" />
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_homeFragmentLoggedIn"-->
+<!--            app:destination="@id/homeFragmentLoggedIn" />-->
         <action
             android:id="@+id/action_homeFragment_to_homeFragmentLoggedIn"
             app:destination="@id/homeFragmentLoggedIn" />

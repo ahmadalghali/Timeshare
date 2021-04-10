@@ -294,7 +294,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
                 snackbar.setAction("SIGN IN", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel);
+                        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel, null);
                         loginDialog.show();
                     }
                 });

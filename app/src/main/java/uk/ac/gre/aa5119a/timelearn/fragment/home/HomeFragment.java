@@ -94,8 +94,9 @@ public class HomeFragment extends Fragment {
 //        NavController navController = navHostFragment.getNavController();
 //        NavDirections action = HomeFragmentDirections.actionHomeFragmentToLoginDialog();
 //        navController.navigate(action);
+        NavDirections destination = HomeFragmentDirections.actionHomeFragmentToHomeFragmentLoggedIn();
 
-        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel);
+        LoginDialog2 loginDialog = new LoginDialog2(getActivity(), userViewModel, destination);
         loginDialog.show();
 
 //        loginDialog = new LoginDialog();

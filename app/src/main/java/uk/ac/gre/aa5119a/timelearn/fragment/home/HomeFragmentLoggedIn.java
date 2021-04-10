@@ -19,6 +19,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 
+import com.squareup.picasso.Picasso;
+
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
@@ -69,6 +71,8 @@ public class HomeFragmentLoggedIn extends Fragment{
                 tvEmail.setText(user.getEmail());
 
                 tvTimeCredits.setText("" + user.getTimeCreditsCount());
+                Picasso.get().load(user.getProfileImageUrl()).into(profileButton);
+
             }
         });
 

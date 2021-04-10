@@ -130,7 +130,7 @@ public class RegisterDialog {
 
 
     private void showLoginDialog() {
-        LoginDialog2 loginDialog = new LoginDialog2(activity, userViewModel);
+        LoginDialog2 loginDialog = new LoginDialog2(activity, userViewModel, null);
         dismiss();
         loginDialog.show();
     }
