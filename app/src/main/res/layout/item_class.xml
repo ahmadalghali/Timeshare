@@ -30,8 +30,8 @@
 
             <ImageView
                 android:id="@+id/ivSubjectImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,17 +42,17 @@
                 android:id="@+id/tvHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="2 Hrs"
-                app:layout_constraintBottom_toBottomOf="@+id/ivUserPhoto"
-                app:layout_constraintStart_toEndOf="@+id/ivUserPhoto" />
+                app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubjectTitle" />
 
             <TextView
                 android:id="@+id/tvSubjectTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="A-Level Pythagoras theorem"
                 app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
@@ -62,7 +62,7 @@
                 android:id="@+id/tvTimeCreditPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="53dp"
+                android:layout_marginStart="32dp"
                 android:text="3.0"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvHours"
@@ -73,7 +73,7 @@
                 android:id="@+id/tvNotificationMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:text="Upcoming Class"
                 android:textSize="16sp"
@@ -81,10 +81,10 @@
                 app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivUserPhoto"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_margin="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,11 +130,11 @@
                 android:id="@+id/tvLessonStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
                 android:text="Status: Not started"
                 app:layout_constraintBottom_toTopOf="@+id/btnStartClass"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/btnStartClass"
+                app:layout_constraintStart_toStartOf="@+id/btnStartClass" />
 
             <Button
                 android:id="@+id/btnStartClass"

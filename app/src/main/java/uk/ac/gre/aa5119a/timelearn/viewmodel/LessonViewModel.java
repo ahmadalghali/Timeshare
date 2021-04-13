@@ -18,4 +18,16 @@ public class LessonViewModel extends ViewModel {
     public void setLessonId(Integer lessonId) {
         this.lessonId.setValue(lessonId);
     }
+
+
+
+    private MutableLiveData<LessonDTO> lesson = new MutableLiveData<>();
+
+    public LiveData<LessonDTO> getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(LessonDTO lesson) {
+        this.lesson.setValue(lesson);
+    }
 }

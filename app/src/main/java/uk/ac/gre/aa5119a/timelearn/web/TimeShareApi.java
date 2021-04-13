@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,6 +24,7 @@ import uk.ac.gre.aa5119a.timelearn.model.notification.Notification;
 import uk.ac.gre.aa5119a.timelearn.model.notification.NotificationClassBooking;
 import uk.ac.gre.aa5119a.timelearn.web.request.ClassBookingRequest;
 import uk.ac.gre.aa5119a.timelearn.web.request.TeacherListingRequest;
+import uk.ac.gre.aa5119a.timelearn.web.response.LessonTimeUpdateResponse;
 import uk.ac.gre.aa5119a.timelearn.web.response.LoginResponse;
 import uk.ac.gre.aa5119a.timelearn.web.response.RegisterResponse;
 import uk.ac.gre.aa5119a.timelearn.web.response.TeacherListingResponse;
@@ -77,4 +79,31 @@ public interface TimeShareApi {
 
     @GET("lesson/{lessonId}")
     Call<LessonDTO> getLesson(@Path("lessonId")int lessonId);
+
+//    @PUT("lesson/update")
+//    Call<LessonDTO> updateLesson(@Body LessonDTO lesson);
+
+    @PUT("lesson/updateTimeLeft")
+    Call<Boolean> updateTimeLeft(@Query("lessonId") int lessonId, @Query("timeLeft") long timeLeft);
+
+    @PUT("lesson/{lessonId}/startClass")
+    Call<Boolean> startClass(@Path("lessonId") int lessonId);
+
+    @PUT("lesson/{lessonId}/joinLesson")
+    Call<Boolean> joinLesson(@Path("lessonId") int lessonId);
+
+    @PUT("lesson/runTimer")
+    Call<LessonTimeUpdateResponse> runTimer(@Query("lessonId") int lessonId,@Query("timeStarted") long timeStarted);
+
+//    @GET("lesson/timerRemaining")
+//    Call<Long> getLessonTimeRemaining(@Query("lessonId")int lessonId);
+
+    @GET("lesson/timerRemaining")
+    Call<LessonTimeUpdateResponse> getLessonTimeRemaining(@Query("lessonId")int lessonId);
+
+    @POST("user/rate")
+    Call<Boolean> rateUser(@Query("userId") int userId, @Query("rating") float rating, @Query("comments") String comments);
+
+    @POST("lesson/startTimer")
+    Call<Boolean> startTimer(@Query("lessonId")int lessonId);
 }

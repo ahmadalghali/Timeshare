@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class MyLessonsFragment extends Fragment {
     RecyclerView rvLessons;
     View view;
     ImageView backBtn;
+    SwipeRefreshLayout refreshLayout;
 
     MyLessonsAdapter adapter;
 
@@ -69,6 +72,8 @@ public class MyLessonsFragment extends Fragment {
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
         lessonViewModel = new ViewModelProvider(getActivity()).get(LessonViewModel.class);
 
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
         backBtn = view.findViewById(R.id.backBtn);
         rvLessons = view.findViewById(R.id.rvLessons);
 
@@ -82,10 +87,18 @@ public class MyLessonsFragment extends Fragment {
         });
         rvLessons.setAdapter(adapter);
 
-        backBtn.setOnClickListener(v ->  {
+        backBtn.setOnClickListener(v -> {
             NavController navController = navHostFragment.getNavController();
             NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToAccountFragment();
             navController.navigate(action);
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUserLessons();
+                refreshLayout.setRefreshing(false);
+            }
         });
     }
 
@@ -110,11 +123,33 @@ public class MyLessonsFragment extends Fragment {
     }
 
     private void joinLesson(int lessonId) {
-        lessonViewModel.setLessonId(lessonId);
 
-        NavController navController = navHostFragment.getNavController();
-        NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToClassroomFragment();
-        navController.navigate(action);
+        timeShareApi.joinLesson(lessonId).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+                    if (response.body()) {
+                        lessonViewModel.setLessonId(lessonId);
+
+                        NavController navController = navHostFragment.getNavController();
+                        NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToClassroomFragment();
+                        navController.navigate(action);
+                    } else {
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 
 

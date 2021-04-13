@@ -74,14 +74,14 @@ public class TeacherListing {
         this.description = description;
     }
 
-    public String getImage() {
+
+    public String getQualificationImageUrl() {
         return qualificationImageUrl;
     }
 
-    public void setImage(int image) {
+    public void setQualificationImageUrl(String qualificationImageUrl) {
         this.qualificationImageUrl = qualificationImageUrl;
     }
-
 
     public List<Integer> getTeachingStyleIds() {
         return teachingStyleIds;

@@ -18,6 +18,7 @@
         android:layout_width="220dp"
         android:layout_height="55dp"
         android:layout_marginTop="216dp"
+        style="?borderlessButtonStyle"
         android:background="@drawable/rounded_white_flat_left"
         android:fontFamily="@font/roboto_bold"
         android:text="Learn"

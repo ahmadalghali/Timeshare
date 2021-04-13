@@ -17,10 +17,12 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.LessonDTO;
 
@@ -70,7 +72,7 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvTimeCreditPrice;
         TextView tvUserName;
         TextView btnStartClass;
-        ImageView ivUserPhoto;
+        CircleImageView ivUserPhoto;
         ImageView ivSubjectImage;
         TextView tvLessonStatus;
         TextView tvLessonDate;
@@ -120,7 +122,7 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (lesson.getStatus().equalsIgnoreCase("not started")) {
                 tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='grey'>" + lesson.getStatus() + "</font>"));
             } else if (lesson.getStatus().equalsIgnoreCase("started")) {
-                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='amber'>" + lesson.getStatus() + "</font>"));
+                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='orange'>" + lesson.getStatus() + "</font>"));
             } else if (lesson.getStatus().equalsIgnoreCase("ready")) {
                 tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='green'>" + lesson.getStatus() + "</font>"));
             } else if (lesson.getStatus().equalsIgnoreCase("cancelled")) {
@@ -132,8 +134,8 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvLessonDate.setText(formattedLessonDate);
 
             Date today = new Date(System.currentTimeMillis());
-
-            if (!today.before(lesson.getLessonDate())) {
+//            LocalDate today = LocalDate.now();
+            if (!today.before(lesson.getLessonDate())  /* && !lesson.getStatus().equalsIgnoreCase("Started") && !lesson.getStatus().equalsIgnoreCase("cancelled")*/) {
                 btnStartClass.setVisibility(View.VISIBLE);
             } else {
                 btnStartClass.setVisibility(View.INVISIBLE);

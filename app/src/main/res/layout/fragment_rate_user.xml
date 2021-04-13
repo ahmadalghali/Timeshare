@@ -36,12 +36,11 @@
         app:layout_constraintTop_toBottomOf="@+id/rbRating" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivTeacherPhoto"
+        android:id="@+id/ivUserPhoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
 
         android:layout_marginTop="32dp"
-        android:src="@drawable/user_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +51,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
-        android:text="John"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivTeacherPhoto"
-        app:layout_constraintStart_toStartOf="@+id/ivTeacherPhoto"
-        app:layout_constraintTop_toBottomOf="@+id/ivTeacherPhoto" />
+        app:layout_constraintEnd_toEndOf="@+id/ivUserPhoto"
+        app:layout_constraintStart_toStartOf="@+id/ivUserPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/ivUserPhoto" />
 
     <TextView
         android:id="@+id/tvHowMuchWouldYouRate"
@@ -66,7 +64,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="How much would you rate John?"
+        android:text="How much would you rate ?"
         android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"

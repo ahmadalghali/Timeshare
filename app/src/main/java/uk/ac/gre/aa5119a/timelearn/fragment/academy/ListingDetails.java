@@ -30,6 +30,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+import com.zolad.zoominimageview.ZoomInImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -71,6 +72,9 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
     private TextView tvTitle;
     private TextView tvDescription;
     private ImageView ivSubjectIcon;
+
+    private TextView tvQualificationTitle;
+    private ZoomInImageView ivQualification;
 
     private TextView tvCity;
 
@@ -117,6 +121,8 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 
         backBtn = view.findViewById(R.id.backBtn);
 
+        tvQualificationTitle  = view.findViewById(R.id.tvQualificationTitle);
+
         ivUserPhoto = view.findViewById(R.id.ivUserPhoto);
         tvUserName = view.findViewById(R.id.tvUserName);
         rbUserRating = view.findViewById(R.id.rbUserRating);
@@ -130,6 +136,8 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
         ivInPerson = view.findViewById(R.id.ivInPerson);
         ivOnline = view.findViewById(R.id.ivOnline);
         tvTitle = view.findViewById(R.id.tvListingTitle);
+
+        ivQualification = view.findViewById(R.id.ivQualification);
 
         tvClassDate = view.findViewById(R.id.tvClassDate);
 
@@ -160,7 +168,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
             ivUserPhoto.setImageResource(R.drawable.ic_account);
         }
 
-        tvUserName.setText(listingResponse.getUser().getEmail());
+        tvUserName.setText(listingResponse.getUser().getFirstname());
 
         tvTitle.setText(listingResponse.getListing().getTitle());
 
@@ -206,6 +214,13 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
             case 5:
                 ivSubjectIcon.setImageResource(R.drawable.ic_english);
                 break;
+        }
+
+        if(listingResponse.getListing().getQualificationImageUrl() != null){
+            Picasso.get().load(listingResponse.getListing().getQualificationImageUrl()).into(ivQualification);
+        } else {
+            ivQualification.setVisibility(View.GONE);
+            tvQualificationTitle.setVisibility(View.GONE);
         }
 
 
@@ -267,7 +282,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 
                 if (userIsLoggedIn) {
                     if (isClassRequested()) {
-                        btnBookClass.setText("Request Already");
+                        btnBookClass.setText("Requested Already");
                         btnBookClass.setEnabled(false);
                         btnBookClass.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                     } else {

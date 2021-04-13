@@ -68,7 +68,7 @@
                 app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivUserPhoto"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

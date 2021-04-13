@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,9 @@ public class MyTeachingFragment extends Fragment {
     List<LessonDTO> lessons = new ArrayList<>();
     RecyclerView rvLessons;
     View view;
+
+    SwipeRefreshLayout refreshLayout;
+
     ImageView backBtn;
 
     MyTeachingAdapter adapter;
@@ -66,6 +71,8 @@ public class MyTeachingFragment extends Fragment {
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
         lessonViewModel = new ViewModelProvider(getActivity()).get(LessonViewModel.class);
 
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+
         backBtn = view.findViewById(R.id.backBtn);
         rvLessons = view.findViewById(R.id.rvLessons);
 
@@ -83,6 +90,14 @@ public class MyTeachingFragment extends Fragment {
             NavController navController = navHostFragment.getNavController();
             NavDirections action = MyTeachingFragmentDirections.actionMyTeachingFragmentToAccountFragment();
             navController.navigate(action);
+        });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUserTeachingLessons();
+                refreshLayout.setRefreshing(false);
+            }
         });
     }
 
@@ -107,11 +122,35 @@ public class MyTeachingFragment extends Fragment {
     }
 
     private void startClass(int lessonId) {
-        lessonViewModel.setLessonId(lessonId);
 
-        NavController navController = navHostFragment.getNavController();
-        NavDirections action = MyTeachingFragmentDirections.actionMyTeachingFragmentToClassroomFragment();
-        navController.navigate(action);
+        timeShareApi.startClass(lessonId).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.isSuccessful()){
+                    if(response.body()){
+                        lessonViewModel.setLessonId(lessonId);
+
+                        NavController navController = navHostFragment.getNavController();
+                        NavDirections action = MyTeachingFragmentDirections.actionMyTeachingFragmentToClassroomFragment();
+                        navController.navigate(action);
+
+                    } else{
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
     }
 
 

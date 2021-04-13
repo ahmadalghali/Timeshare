@@ -29,11 +29,15 @@ import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.LessonDTO;
@@ -87,7 +91,7 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView tvTimeCreditPrice;
         TextView tvUserName;
         TextView btnJoinLesson;
-        ImageView ivUserPhoto;
+        CircleImageView ivUserPhoto;
         ImageView ivSubjectImage;
         TextView tvLessonStatus;
         TextView tvLessonDate;
@@ -136,11 +140,11 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             if (lesson.getStatus().equalsIgnoreCase("not started")) {
                 tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='grey'>" + lesson.getStatus() + "</font>"));
-            } else if (lesson.getStatus().equalsIgnoreCase("started")) {
-                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='amber'>" + lesson.getStatus() + "</font>"));
-            } else if (lesson.getStatus().equalsIgnoreCase("ready")) {
-                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='green'>" + lesson.getStatus() + "</font>"));
-            } else if (lesson.getStatus().equalsIgnoreCase("cancelled")) {
+            } else if (lesson.getStatus().equalsIgnoreCase("Started")) {
+                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='#d49c11'>" + lesson.getStatus() + "</font>"));
+            } else if (lesson.getStatus().equalsIgnoreCase("Ready")) {
+                tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='#5bc75b'>" + lesson.getStatus() + "</font>"));
+            } else if (lesson.getStatus().equalsIgnoreCase("Cancelled")) {
                 tvLessonStatus.setText(Html.fromHtml("Status: " + "<font color='red'>" + lesson.getStatus() + "</font>"));
             }
 
@@ -149,8 +153,8 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tvLessonDate.setText(formattedLessonDate);
 
             Date today = new Date(System.currentTimeMillis());
-
-            if (!today.before(lesson.getLessonDate())) {
+//            LocalDate today = LocalDate.now();
+            if (!today.before(lesson.getLessonDate())  && lesson.getStatus().equalsIgnoreCase("started")) {
                 btnJoinLesson.setVisibility(View.VISIBLE);
             } else {
                 btnJoinLesson.setVisibility(View.INVISIBLE);

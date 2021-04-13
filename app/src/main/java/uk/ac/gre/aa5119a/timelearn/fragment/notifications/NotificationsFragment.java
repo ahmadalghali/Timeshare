@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -60,8 +62,11 @@ public class NotificationsFragment extends Fragment {
     RecyclerView rvNotifications;
     View view;
 
+    SwipeRefreshLayout refreshLayout;
     NotificationAdapter adapter;
     LoadingDialog loadingDialog;
+
+    TextView tvNoNewNotif;
 
 //    LoadingCircle loadingCircle = new LoadingCircle(getActivity());
 
@@ -89,7 +94,10 @@ public class NotificationsFragment extends Fragment {
 //        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 //        executor.scheduleAtFixedRate(getNotificationsRunnable, 0, 5, TimeUnit.SECONDS);
 
+        refreshLayout = view.findViewById(R.id.refreshLayout);
         rvNotifications = view.findViewById(R.id.rvNotifications);
+
+        tvNoNewNotif = view.findViewById(R.id.tvNoNewNotif);
 
         rvNotifications.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -172,6 +180,14 @@ public class NotificationsFragment extends Fragment {
 
          loadingDialog = new LoadingDialog(getActivity(), true);
 
+         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+             @Override
+             public void onRefresh() {
+                 getNotifications();
+                 refreshLayout.setRefreshing(false);
+             }
+         });
+
     }
 
 
@@ -190,12 +206,19 @@ public class NotificationsFragment extends Fragment {
                     loadingDialog.dismissDialog();
                     if (response.isSuccessful()) {
                         notifications = response.body();
+                        if(notifications.size() == 0){
+                            tvNoNewNotif.setVisibility(View.VISIBLE);
+
+                        }else{
+                            tvNoNewNotif.setVisibility(View.INVISIBLE);
+
+                        }
+                        adapter.setNotifications(notifications);
 
 
 //                        int menuItemId = bottomNavigation.getMenu().getItem(3).getItemId();
 //                        BadgeDrawable notificationBadge = bottomNavigation.getOrCreateBadge(menuItemId);
 //                        notificationBadge.setVi
-                        adapter.setNotifications(notifications);
 
 
                     }

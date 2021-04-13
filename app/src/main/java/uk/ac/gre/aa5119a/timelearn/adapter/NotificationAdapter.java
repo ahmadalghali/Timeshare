@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.gre.aa5119a.timelearn.MainActivity;
 import uk.ac.gre.aa5119a.timelearn.R;
 import uk.ac.gre.aa5119a.timelearn.model.notification.Notification;
@@ -99,7 +100,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tvUserName;
         TextView btnReject;
         TextView btnAccept;
-        ImageView ivUserPhoto;
+        CircleImageView ivUserPhoto;
         ImageView ivSubjectImage;
 
         NotificationClassBookingViewHolder(@NonNull @NotNull View itemView) {
@@ -153,7 +154,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView tvSubjectTitle;
         TextView tvUserName;
         TextView btnViewClass;
-        ImageView ivUserPhoto;
+        CircleImageView ivUserPhoto;
         ImageView ivSubjectImage;
         TextView tvClassDate;
         ConstraintLayout clNotificationBody;
