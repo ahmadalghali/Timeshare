@@ -22,6 +22,7 @@ import androidx.navigation.NavDirections;
 import com.squareup.picasso.Picasso;
 
 import uk.ac.gre.aa5119a.timelearn.R;
+import uk.ac.gre.aa5119a.timelearn.dialog.WelcomeDialog;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.TimeShareApi;
@@ -75,6 +76,8 @@ public class HomeFragmentLoggedIn extends Fragment{
 
             }
         });
+
+
 
         return view;
     }

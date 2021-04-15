@@ -234,6 +234,11 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 //            promptSignIn();
         }
 
+        boolean isLister = userViewModel.getUser().getValue().getId() == listingResponse.getUser().getId();
+        if(!isLister){
+            btnBookClass.setVisibility(View.VISIBLE);
+        }
+
 
     }
 
@@ -394,7 +399,7 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 //                                    navController.navigate(action);
                     } else {
 
-                        Snackbar.make(getActivity().findViewById(android.R.id.content), "Class request could not be made", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
+                        Snackbar.make(getActivity().findViewById(android.R.id.content), "You do not have sufficient balance, teach what you love to earn more TimeCredits!", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
                     }
 
                 } else {

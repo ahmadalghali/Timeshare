@@ -18,6 +18,9 @@ import androidx.navigation.NavDirections;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +32,7 @@ import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.refreshUserDetails;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 
 public class AccountFragment extends Fragment {
@@ -64,16 +68,49 @@ public class AccountFragment extends Fragment {
         assignGlobalVariables();
         setListeners();
         boolean userIsLoggedIn = userViewModel.getUser().getValue() != null;
+        refreshUserDetails();
 
-        if (userIsLoggedIn) {
-            setUserDetails();
-        }
+
 
         bottomNavigation.setVisibility(View.VISIBLE);
         return view;
     }
 
+//    public void refreshUserDetails() {
+//        timeShareApi.getUser(userViewModel.getUser().getValue().getId()).enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(Call<User> call, Response<User> response) {
+//                if(response.isSuccessful()){
+//                    userViewModel.setUser(response.body());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<User> call, Throwable t) {
+//
+//            }
+//        });
+//    }
+
+    public void refreshUserDetails() {
+        timeShareApi.getUser(userViewModel.getUser().getValue().getId()).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    userViewModel.setUser(response.body());
+
+                        setUserDetails();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
     private void setUserDetails() {
+
         User user = userViewModel.getUser().getValue();
 
         Picasso.get()

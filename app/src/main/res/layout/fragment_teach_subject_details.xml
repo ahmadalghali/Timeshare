@@ -95,6 +95,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cbWeekends" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/textView14"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:text="Contact number:"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/nbTimeRate" />-->
+
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
@@ -235,10 +248,10 @@
 
         <Button
             android:id="@+id/addListingButton"
+            style="?borderlessButtonStyle"
             android:layout_width="400dp"
             android:layout_height="60dp"
-            android:layout_marginTop="80dp"
-            style="?borderlessButtonStyle"
+            android:layout_marginTop="50dp"
             android:background="@drawable/button_ripple"
             android:backgroundTint="#FFC107"
             android:elevation="30dp"
@@ -299,6 +312,22 @@
             app:layout_constraintStart_toEndOf="@+id/nbTimeRate"
             app:layout_constraintTop_toTopOf="@+id/nbTimeRate"
             app:tint="@color/white" />
+
+<!--        <EditText-->
+<!--            android:id="@+id/etPhoneNumber"-->
+<!--            android:layout_width="204dp"-->
+<!--            android:layout_height="54dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="phone"-->
+<!--            android:maxLength="11"-->
+<!--            android:text=""-->
+
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textView14"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView14" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

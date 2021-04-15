@@ -14,6 +14,7 @@ public class TeacherListingRequest {
     private List<Integer> availabilityIds;
     private List<Integer> teachingStyleIds;
 
+    private String phoneNumber;
 
     public TeacherListingRequest(int subjectId, int userId, String title, String description, String qualificationImageUrl, Double timeRate, List<Integer> availabilityIds, List<Integer> teachingStyleIds) {
         this.subjectId = subjectId;
@@ -27,8 +28,13 @@ public class TeacherListingRequest {
     }
 
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public int getSubjectId() {
         return subjectId;

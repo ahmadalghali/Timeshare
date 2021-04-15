@@ -77,6 +77,9 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvLessonStatus;
         TextView tvLessonDate;
 
+        TextView tvEmail;
+        TextView tvPhoneNumber;
+
         LessonViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tvNotificationMessage = itemView.findViewById(R.id.tvNotificationMessage);
@@ -90,6 +93,8 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvLessonStatus = itemView.findViewById(R.id.tvLessonStatus);
             tvLessonDate = itemView.findViewById(R.id.tvLessonDate);
 
+            tvEmail = itemView.findViewById(R.id.tvEmail);
+            tvPhoneNumber = itemView.findViewById(R.id.tvPhoneNumber);
         }
 
         void setLessonData(LessonDTO lesson) {
@@ -99,7 +104,8 @@ public class MyTeachingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvHours.setText(lesson.getHours() + " Hrs");
             tvTimeCreditPrice.setText("" + lesson.getLessonPrice());
             tvUserName.setText("Student: "  +  lesson.getStudentFirstName());
-
+            tvEmail.setText("Email: " + lesson.getStudentEmail());
+            tvPhoneNumber.setText("Phone: " + lesson.getStudentPhoneNumber());
 
             try {
                 Picasso.get()

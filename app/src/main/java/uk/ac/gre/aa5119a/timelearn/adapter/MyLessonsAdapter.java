@@ -95,6 +95,9 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ImageView ivSubjectImage;
         TextView tvLessonStatus;
         TextView tvLessonDate;
+        TextView tvEmail;
+        TextView tvPhoneNumber;
+
 
         LessonViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -108,6 +111,8 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ivSubjectImage = itemView.findViewById(R.id.ivSubjectImage);
             tvLessonStatus = itemView.findViewById(R.id.tvLessonStatus);
             tvLessonDate = itemView.findViewById(R.id.tvLessonDate);
+            tvEmail = itemView.findViewById(R.id.tvEmail);
+            tvPhoneNumber = itemView.findViewById(R.id.tvPhoneNumber);
 
         }
 
@@ -118,6 +123,9 @@ public class MyLessonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tvHours.setText(lesson.getHours() + " Hrs");
             tvTimeCreditPrice.setText("" + lesson.getLessonPrice());
             tvUserName.setText("Teacher: " + lesson.getTeacherFirstName());
+            tvEmail.setText("Email: " + lesson.getTeacherEmail());
+            tvPhoneNumber.setText("Phone: " + lesson.getTeacherPhoneNumber());
+
 
 
             try {

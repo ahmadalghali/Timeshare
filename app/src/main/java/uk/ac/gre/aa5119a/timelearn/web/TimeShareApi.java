@@ -106,4 +106,14 @@ public interface TimeShareApi {
 
     @POST("lesson/startTimer")
     Call<Boolean> startTimer(@Query("lessonId")int lessonId);
+
+    @PUT("lesson/end")
+    Call<Boolean> endLesson(@Query("lessonId") int lessonId, @Query("userId") int userId);
+
+    @PUT("lesson/quit")
+    Call<Boolean> quitLesson(@Query("lessonId") int lessonId, @Query("userId") int userId);
+
+
+    @GET("user")
+    Call<User> getUser(@Query("userId") int userId);
 }

@@ -171,6 +171,11 @@ public class LoginDialog2 {
                         NavController navController = navHostFragment.getNavController();
 
                         navController.navigate(destination);
+
+                        if(userViewModel.getUser().getValue().getLoginCount() == 1){
+                            WelcomeDialog welcomeDialog = new WelcomeDialog(activity);
+                            welcomeDialog.show();
+                        }
                     }
 
                     dismiss();

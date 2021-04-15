@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,7 @@ import uk.ac.gre.aa5119a.timelearn.viewmodel.LessonViewModel;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 
 
+import static uk.ac.gre.aa5119a.timelearn.MainActivity.bottomNavigation;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.navHostFragment;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.timeShareApi;
 import static uk.ac.gre.aa5119a.timelearn.MainActivity.userViewModel;
@@ -135,7 +139,9 @@ public class MyLessonsFragment extends Fragment {
                         NavDirections action = MyLessonsFragmentDirections.actionMyLessonsFragmentToClassroomFragment();
                         navController.navigate(action);
                     } else {
-                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                        Snackbar.make(getActivity().findViewById(android.R.id.content), "You do not have sufficient balance.", BaseTransientBottomBar.LENGTH_LONG).setAnchorView(bottomNavigation).show();
+
+//                        Toast.makeText(getContext(), "You do not have sufficient balance for this lesson", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();

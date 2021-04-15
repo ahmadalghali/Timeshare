@@ -33,6 +33,56 @@ public class LessonDTO {
 
     private long timeStarted;
 
+    private Boolean hasFinished;
+
+    private String teacherPhoneNumber;
+
+    private String studentPhoneNumber;
+
+
+    private String teacherEmail;
+    private String studentEmail;
+
+
+    public String getTeacherPhoneNumber() {
+        return teacherPhoneNumber;
+    }
+
+    public void setTeacherPhoneNumber(String teacherPhoneNumber) {
+        this.teacherPhoneNumber = teacherPhoneNumber;
+    }
+
+    public String getStudentPhoneNumber() {
+        return studentPhoneNumber;
+    }
+
+    public void setStudentPhoneNumber(String studentPhoneNumber) {
+        this.studentPhoneNumber = studentPhoneNumber;
+    }
+
+    public String getTeacherEmail() {
+        return teacherEmail;
+    }
+
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public Boolean getHasFinished() {
+        return hasFinished;
+    }
+
+    public void setHasFinished(Boolean hasFinished) {
+        this.hasFinished = hasFinished;
+    }
 
     public long getTimeStarted() {
         return timeStarted;

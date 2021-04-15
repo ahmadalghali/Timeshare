@@ -17,6 +17,9 @@ public class User implements Parcelable, Serializable {
     private int ratingCount;
     private double timeCreditsCount;
     private String firstname;
+    private int loginCount;
+
+    private String phoneNumber;
 
 
     protected User() {
@@ -26,6 +29,12 @@ public class User implements Parcelable, Serializable {
         this.email = email;
         this.password = password;
 
+    }
+
+    public User(String email, String password, String phoneNumber) {
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
     }
     public User(String email, String password, String city, String profileImageUrl) {
         this.email = email;
@@ -51,6 +60,15 @@ public class User implements Parcelable, Serializable {
             return new User[size];
         }
     };
+
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getEmail() {
         return email;
@@ -135,5 +153,13 @@ public class User implements Parcelable, Serializable {
         dest.writeInt(id);
         dest.writeString(email);
         dest.writeString(password);
+    }
+
+    public int getLoginCount() {
+        return loginCount;
+    }
+
+    public void setLoginCount(int loginCount) {
+        this.loginCount = loginCount;
     }
 }

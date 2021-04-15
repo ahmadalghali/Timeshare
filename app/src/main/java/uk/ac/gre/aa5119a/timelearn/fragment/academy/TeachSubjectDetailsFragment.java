@@ -85,6 +85,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
     private CheckBox cbWeekends;
     private NumberPicker npTimeRate;
 
+//    private EditText etPhoneNumber;
 
     private Button addListingBtn;
     private Button cancelBtn;
@@ -101,6 +102,8 @@ public class TeachSubjectDetailsFragment extends Fragment {
     private boolean weekdaysAvailability;
     private boolean weekendsAvailability;
     private double timeRate;
+
+//    private String phoneNumber;
 
     List<Integer> teachingStyles;
     List<Integer> daysOfAvailability;
@@ -156,6 +159,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
         tvAvailability = view.findViewById(R.id.textView7);
         tvDescription = view.findViewById(R.id.textView8);
 
+//        etPhoneNumber =  view.findViewById(R.id.etPhoneNumber);
         npTimeRate = view.findViewById(R.id.nbTimeRate);
 
         storageReference = FirebaseStorage.getInstance().getReference("image_uploads");
@@ -245,6 +249,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
                    teacherListingRequest = new TeacherListingRequest(subject.getSubjectId(), userViewModel.getUser().getValue().getId(), title, description, null, timeRate, teachingStyles, daysOfAvailability);
                }
 
+//               teacherListingRequest.setPhoneNumber(phoneNumber);
 
                 Log.d("request", teacherListingRequest.toString());
 
@@ -366,6 +371,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
         onlineTeaching = cbOnline.isChecked();
         weekdaysAvailability = cbWeekdays.isChecked();
         weekendsAvailability = cbWeekends.isChecked();
+//        phoneNumber = etPhoneNumber.getText().toString();
 
         switch (npTimeRate.getValue()) {
             case 1:

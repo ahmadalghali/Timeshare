@@ -231,6 +231,8 @@
             android:backgroundTint="@color/sky_blue"
             android:fontFamily="@font/roboto_bold"
             android:text="Book Class"
+            android:visibility="invisible"
+            tools:visibility="visible"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

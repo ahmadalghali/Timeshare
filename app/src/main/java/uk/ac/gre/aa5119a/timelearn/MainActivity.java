@@ -158,5 +158,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public static void refreshUserDetails() {
+        timeShareApi.getUser(userViewModel.getUser().getValue().getId()).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    userViewModel.setUser(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }

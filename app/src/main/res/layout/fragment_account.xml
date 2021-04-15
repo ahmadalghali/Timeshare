@@ -45,7 +45,6 @@
         android:layout_marginBottom="45dp"
         android:background="@drawable/button_ripple"
         android:backgroundTint="@color/Red"
-        android:text="5"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:visibility="invisible"
@@ -100,7 +99,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="27"
             android:textColor="#F1F1F1"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/timeCredits3"
@@ -125,7 +123,7 @@
 
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/user_photo"
+            android:src="@drawable/default_user_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -148,7 +146,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="John Doe"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
@@ -159,7 +156,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="26"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -176,14 +172,13 @@
         android:layout_marginBottom="45dp"
         android:background="@drawable/button_ripple"
         android:backgroundTint="@color/Red"
-        tools:visibility="visible"
-        android:text="5"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/btnMyClass"
         app:layout_constraintEnd_toEndOf="@+id/btnMyClass"
         app:layout_constraintStart_toEndOf="@+id/btnMyClass"
         app:layout_constraintTop_toTopOf="@+id/btnMyClass"
-        android:visibility="invisible"/>
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

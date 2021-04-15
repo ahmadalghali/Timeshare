@@ -50,6 +50,9 @@ public class RegisterDialog {
     private TextInputLayout etEmail;
     private TextInputLayout etPassword;
     private TextInputLayout etConfirmPassword;
+    private TextInputLayout etPhoneNumber;
+    private TextInputLayout etFirstName;
+
 
     private TextView signInButton;
     private Button registerButton;
@@ -107,6 +110,8 @@ public class RegisterDialog {
         etConfirmPassword = view.findViewById(R.id.etConfirmPassword);
         registerButton = view.findViewById(R.id.registerButton);
         signInButton = view.findViewById(R.id.signInButton);
+        etPhoneNumber = view.findViewById(R.id.etPhoneNumber);
+        etFirstName = view.findViewById(R.id.etFirstName);
 
     }
 
@@ -137,7 +142,7 @@ public class RegisterDialog {
 
     private Boolean areFieldsEmpty() {
 
-        TextInputLayout[] fields = {etEmail, etPassword, etConfirmPassword};
+        TextInputLayout[] fields = {etEmail, etPassword, etConfirmPassword, etPhoneNumber, etFirstName};
 
         boolean empty = false;
 
@@ -159,15 +164,19 @@ public class RegisterDialog {
         etEmail.setError(null);
         etConfirmPassword.setError(null);
         etPassword.setError(null);
+        etPhoneNumber.setError(null);
+        etFirstName.setError(null);
 
         if (areFieldsEmpty()) {
             return;
         }
 
 
-        String email = etEmail.getEditText().getText().toString().trim();
+        String email = etEmail.getEditText().getText().toString().trim().toLowerCase();
         String password = etPassword.getEditText().getText().toString().trim();
         String confirmPassword = etConfirmPassword.getEditText().getText().toString().trim();
+        String phoneNumber = etPhoneNumber.getEditText().getText().toString().trim();
+        String firstName = etFirstName.getEditText().getText().toString();
 
         if (!confirmPassword.equals(password)) {
             etConfirmPassword.setError("Password does not match");
@@ -180,7 +189,9 @@ public class RegisterDialog {
         loadingDialog.setMessage("Registering...");
         loadingDialog.startLoadingDialog();
 
-        Call<RegisterResponse> call = timeShareApi.register(new User(email, password));
+        User user = new User(email, password, phoneNumber);
+        user.setFirstname(firstName);
+        Call<RegisterResponse> call = timeShareApi.register(user);
 
 
         call.enqueue(new Callback<RegisterResponse>() {
