@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.navigation.NavDirections;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uk.ac.gre.aa5119a.timelearn.R;
+import uk.ac.gre.aa5119a.timelearn.fragment.home.HomeFragmentDirections;
 import uk.ac.gre.aa5119a.timelearn.model.User;
 import uk.ac.gre.aa5119a.timelearn.viewmodel.UserViewModel;
 import uk.ac.gre.aa5119a.timelearn.web.response.RegisterResponse;
@@ -135,7 +137,9 @@ public class RegisterDialog {
 
 
     private void showLoginDialog() {
-        LoginDialog2 loginDialog = new LoginDialog2(activity, userViewModel, null);
+        NavDirections destination = HomeFragmentDirections.actionHomeFragmentToHomeFragmentLoggedIn();
+
+        LoginDialog2 loginDialog = new LoginDialog2(activity, userViewModel, destination);
         dismiss();
         loginDialog.show();
     }

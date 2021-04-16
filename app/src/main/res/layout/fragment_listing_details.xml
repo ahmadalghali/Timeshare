@@ -152,6 +152,8 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto_bold"
         android:text="A-Level Maths"
+        android:inputType="textNoSuggestions"
+
         android:textColor="@color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +193,8 @@
         android:fontFamily="@font/roboto"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:inputType="textNoSuggestions"
+
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum leo dolor. Ut elementum erat at enim finibus ornare. Proin sem sem, dictum vitae imperdiet a, porta et eros. Phasellus id quam at dolor commodo malesuada. Cras ullamcorper pulvinar interdum. Sed ac ex justo. Sed suscipit elit eu rutrum placerat."
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -231,7 +235,7 @@
             android:backgroundTint="@color/sky_blue"
             android:fontFamily="@font/roboto_bold"
             android:text="Book Class"
-            android:visibility="invisible"
+            android:visibility="visible"
             tools:visibility="visible"
             android:textColor="@color/white"
             android:textSize="20sp"

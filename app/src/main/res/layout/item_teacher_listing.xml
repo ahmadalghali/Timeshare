@@ -26,8 +26,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:inputType="textMultiLine"
+        android:inputType="textNoSuggestions"
         android:text="A Level Maths"
+        android:maxWidth="250dp"
         android:textColor="#343434"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ivTeacherPhoto"
@@ -41,11 +42,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:numStars="5"
-        app:layout_constraintStart_toStartOf="@+id/ivTeacherPhoto"
-        app:layout_constraintTop_toBottomOf="@+id/ivTeacherPhoto"
-        android:progressTint="@color/Gold"
         android:progressBackgroundTint="@color/black"
-        />
+        android:progressTint="@color/Gold"
+        app:layout_constraintStart_toStartOf="@+id/ivTeacherPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/ivTeacherPhoto" />
 
     <TextView
         android:id="@+id/tvCity"
@@ -126,4 +126,14 @@
         android:text="per hour"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toEndOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/tvUserRatings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/rbTeacherRating"
+        app:layout_constraintStart_toEndOf="@+id/rbTeacherRating"
+        app:layout_constraintTop_toTopOf="@+id/rbTeacherRating" />
 </androidx.constraintlayout.widget.ConstraintLayout>

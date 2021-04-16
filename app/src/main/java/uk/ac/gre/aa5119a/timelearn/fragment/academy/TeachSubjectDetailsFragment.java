@@ -318,7 +318,7 @@ public class TeachSubjectDetailsFragment extends Fragment {
 
 
         if (imageUri != null) {
-            loadingDialog.setMessage("Uploading Image...");
+            loadingDialog.setMessage("Saving qualification...");
 
             StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 

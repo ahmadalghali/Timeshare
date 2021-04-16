@@ -234,10 +234,13 @@ public class ListingDetails extends Fragment implements DatePickerDialog.OnDateS
 //            promptSignIn();
         }
 
-        boolean isLister = userViewModel.getUser().getValue().getId() == listingResponse.getUser().getId();
-        if(!isLister){
-            btnBookClass.setVisibility(View.VISIBLE);
+        if(userViewModel.getUser().getValue() != null){
+            boolean isLister = userViewModel.getUser().getValue().getId() == listingResponse.getUser().getId();
+            if(isLister){
+                btnBookClass.setVisibility(View.INVISIBLE);
+            }
         }
+
 
 
     }

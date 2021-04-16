@@ -60,6 +60,10 @@ public class RateUserFragment extends Fragment {
 
     User user;
 
+    boolean isStudent;
+
+    int userIdToRate;
+
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -77,17 +81,20 @@ public class RateUserFragment extends Fragment {
     }
 
     private void setDetails() {
-        boolean isStudent = lesson.getStudentId() == user.getId();
+         isStudent = lesson.getStudentId() == user.getId();
 
         if (isStudent) {
             tvHowMuchWouldYouRate.setText("How much would you rate " + lesson.getTeacherFirstName() + "?");
             Picasso.get().load(lesson.getTeacherImage()).into(ivUserPhoto);
             tvUserName.setText(lesson.getTeacherFirstName());
+            userIdToRate = lesson.getTeacherId();
 
         } else {
             tvHowMuchWouldYouRate.setText("How much would you rate " + lesson.getStudentFirstName() + "?");
             Picasso.get().load(lesson.getStudentImage()).into(ivUserPhoto);
             tvUserName.setText(lesson.getStudentFirstName());
+            userIdToRate = lesson.getStudentId();
+
         }
     }
 
@@ -107,7 +114,7 @@ public class RateUserFragment extends Fragment {
         String comments = etComments.getText().toString();
 
 //        Toast.makeText(getContext(),"rating: " +  rating + "comments: " + comments + "user: " + user.getId(), Toast.LENGTH_SHORT).show();
-        timeShareApi.rateUser(user.getId(), rating, comments).enqueue(new Callback<Boolean>() {
+        timeShareApi.rateUser(userIdToRate, rating, comments).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(response.isSuccessful()){

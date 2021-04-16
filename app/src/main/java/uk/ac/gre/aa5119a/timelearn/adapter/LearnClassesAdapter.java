@@ -97,6 +97,7 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
         holder.tvCity.setText(response.getUser().getCity());
         holder.tvTimeRate.setText(String.valueOf(_class.getTimeRate()));
         holder.rbUserRating.setRating((float) response.getUser().getRatingScore());
+        holder.tvUserRatings.setText("" + response.getUser().getRatingCount());
 
         if(!_class.getTeachingStyleIds().contains(1)){
             holder.ivInPerson.setVisibility(View.GONE);
@@ -128,6 +129,7 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
         ImageView ivOnline;
         TextView tvCity;
 
+        TextView tvUserRatings;
         public LearnClassViewHolder(@NonNull View itemView, OnClassClickedListener onClassClickedListener) {
             super(itemView);
 
@@ -140,6 +142,7 @@ public class LearnClassesAdapter extends RecyclerView.Adapter<LearnClassesAdapte
             ivInPerson = itemView.findViewById(R.id.ivInPerson);
             ivOnline = itemView.findViewById(R.id.ivOnline);
             tvCity = itemView.findViewById(R.id.tvCity);
+            tvUserRatings = itemView.findViewById(R.id.tvUserRatings);
 
             rbUserRating.setIsIndicator(true);
 //

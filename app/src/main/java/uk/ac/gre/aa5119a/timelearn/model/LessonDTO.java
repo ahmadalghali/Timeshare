@@ -44,6 +44,17 @@ public class LessonDTO {
     private String studentEmail;
 
 
+    private int teacherId;
+
+
+    public int getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public String getTeacherPhoneNumber() {
         return teacherPhoneNumber;
     }

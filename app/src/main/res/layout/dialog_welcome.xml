@@ -28,11 +28,11 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="22dp"
                 android:fontFamily="@font/roboto_medium"
                 android:maxWidth="350dp"
-                android:text="Welcome to timeshare, the platform where you can learn and teach new skills, from academic classes... to sports coaching, you can find it all here.
-            \n\nThe platform relies purely on a time-banking architecture as currency, all transactions are achieved with our TimeCredits.\n\nWe have provided you with 3 complimentary TC's to get you started. To earn more TimeCredits, create a new class and teach what you love!"
+                android:text="Welcome to timeshare, the platform where you can learn and teach new skills...\n\n ...from academic classes, to sports coaching, you can find it all here!
+            \n\nThe platform relies purely on a time-banking architecture and uses time as currency. All transactions are made possible with TimeCredits.\n\nWe have provided you with 3 complimentary TC's to get you started. To earn more TimeCredits, create a new class and teach what you love!"
                 android:textColor="#EDEDED"
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
