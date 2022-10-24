@@ -2,7 +2,7 @@
 
 # Timeshare &nbsp; :alarm_clock: :teacher: :iphone: :books: :brain:
 
-Timeshare is an online tutoring platform using time tokens, you teach an hour to earn 1 token that can be spent on Timeshare to learn another skill!
+Timeshare is an online skill sharing platform, teach what you're good at, earn tokens and learn other skills!
 
  YouTube Demo (2:52) - https://www.youtube.com/watch?v=1wInNwdrN88
 
